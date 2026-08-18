@@ -1,0 +1,24 @@
+FINAL API/D1 FIX V2
+
+Cloudflare Pages binding:
+DB -> saadengineeringD1
+
+This version uses NEW table names:
+saad_products
+saad_product_images
+saad_inquiries
+
+This avoids conflicts with old/incomplete tables already in the D1 database.
+
+Test after deployment:
+https://saadengineering.pages.dev/api/health
+
+Expected:
+{"ok":true,"d1":true,"message":"SAAD Engineering API + D1 connected"}
+
+Cloudinary:
+cloud name hzjcimv7
+unsigned preset saadengineering
+
+Admin:
+admin / saad123

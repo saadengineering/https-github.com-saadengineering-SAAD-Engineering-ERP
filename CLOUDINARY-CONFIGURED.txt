@@ -1,0 +1,4 @@
+Cloudinary configured from the user's Cloudinary dashboard:
+Cloud name: hzjcimv7
+Unsigned upload preset: saadengineering
+R2 is not required.

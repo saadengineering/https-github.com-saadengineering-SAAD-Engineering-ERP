@@ -1,0 +1,5 @@
+name = "saad-engineering"
+compatibility_date = "2026-08-18"
+
+# D1 is bound in Cloudflare Pages -> Settings -> Bindings as DB.
+# Do not add a second/old database binding here.

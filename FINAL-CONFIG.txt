@@ -1,0 +1,6 @@
+FINAL CONFIG
+Cloudinary cloud name: hzjcimv7
+Cloudinary unsigned upload preset: saadengineering
+Cloudflare Pages D1 binding: DB -> saadengineeringD1
+D1 database ID: cb3a796f-3b40-46f0-a975-9d65ac43e0ac
+R2: NOT REQUIRED

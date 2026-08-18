@@ -1,0 +1,9 @@
+FINAL DEPLOY - PRODUCT SAVE FIX
+
+1. Cloudflare Pages Settings > Bindings: keep D1 binding Name=DB, Database=saadengineering.
+2. Deploy this ZIP.
+3. After deploy open /api/health.
+4. Expected JSON: ok=true, d1=true, tables include saad_products, saad_product_images, saad_inquiries.
+5. Then Admin > Products > Save Product.
+
+Important: the previous worker had a health-route control-flow bug that caused other API requests to return the health response. This build fixes that bug.
