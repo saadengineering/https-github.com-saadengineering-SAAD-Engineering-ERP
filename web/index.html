@@ -1,1 +1,99 @@
-Create SAAD Engineering ERP dashboard
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f172a">
+<title>SAAD Engineering ERP</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f1f5f9;
+  color:#0f172a;
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+
+.login-screen{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#0f172a,#1e3a8a);
+  padding:20px;
+}
+.login-box{
+  width:100%;
+  max-width:430px;
+  background:white;
+  border-radius:18px;
+  padding:35px;
+  box-shadow:0 25px 60px rgba(0,0,0,.25);
+}
+.logo{
+  width:75px;
+  height:75px;
+  border-radius:16px;
+  background:#1d4ed8;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  font-size:24px;
+  margin:0 auto 18px;
+}
+.login-box h1{text-align:center;font-size:25px}
+.login-box p{text-align:center;color:#64748b;margin:8px 0 25px}
+
+.form-group{margin-bottom:16px}
+.form-group label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:7px;
+}
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;
+  padding:12px 13px;
+  border:1px solid #cbd5e1;
+  border-radius:9px;
+  outline:none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color:#2563eb;
+}
+.btn{
+  border:0;
+  border-radius:9px;
+  padding:11px 17px;
+  font-weight:bold;
+}
+.btn-primary{background:#2563eb;color:white}
+.btn-primary:hover{background:#1d4ed8}
+.btn-secondary{background:#e2e8f0;color:#0f172a}
+.btn-danger{background:#dc2626;color:white}
+
+.erp{display:none;min-height:100vh}
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  width:255px;
+  background:#0f172a;
+  color:white;
+  overflow-y:auto;
+  z-index:20;
+}
+.sidebar-header{
+  padding:22px 18px;
+  border-bottom:1px solid #334155;
+}
+.sidebar-header strong
