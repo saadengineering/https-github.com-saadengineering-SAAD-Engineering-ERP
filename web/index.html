@@ -18,19 +18,19 @@
   --primary-dark:#1d4ed8;
   --dark:#0f172a;
   --dark2:#1e293b;
-  --light:#f1f5f9;
+  --bg:#f1f5f9;
+  --card:#ffffff;
   --border:#e2e8f0;
   --text:#0f172a;
   --muted:#64748b;
   --success:#16a34a;
-  --danger:#dc2626;
   --warning:#d97706;
-  --white:#ffffff;
+  --danger:#dc2626;
 }
 
 body{
   font-family:Arial,Helvetica,sans-serif;
-  background:var(--light);
+  background:var(--bg);
   color:var(--text);
 }
 
@@ -45,10 +45,6 @@ button{
   cursor:pointer;
 }
 
-.hidden{
-  display:none!important;
-}
-
 /* ================= LOGIN ================= */
 
 .login-screen{
@@ -56,8 +52,8 @@ button{
   display:flex;
   align-items:center;
   justify-content:center;
-  background:linear-gradient(135deg,#0f172a,#1e3a8a);
   padding:20px;
+  background:linear-gradient(135deg,#0f172a,#1e3a8a);
 }
 
 .login-box{
@@ -66,29 +62,29 @@ button{
   background:#fff;
   border-radius:20px;
   padding:35px;
-  box-shadow:0 25px 60px rgba(0,0,0,.3);
+  box-shadow:0 25px 70px rgba(0,0,0,.30);
 }
 
-.logo{
-  width:78px;
-  height:78px;
+.login-logo{
+  width:82px;
+  height:82px;
+  margin:0 auto 18px;
   border-radius:18px;
-  background:linear-gradient(135deg,#2563eb,#1e40af);
-  color:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-weight:900;
-  font-size:24px;
-  margin:0 auto 18px;
+  background:#2563eb;
+  color:#fff;
+  font-size:26px;
+  font-weight:bold;
 }
 
 .login-box h1{
   text-align:center;
-  font-size:25px;
+  font-size:26px;
 }
 
-.login-box p{
+.login-box .subtitle{
   text-align:center;
   color:var(--muted);
   margin:8px 0 25px;
@@ -115,35 +111,254 @@ button{
   background:#fff;
 }
 
-.form-group textarea{
-  min-height:90px;
-  resize:vertical;
-}
-
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus{
   border-color:var(--primary);
-  box-shadow:0 0 0 3px rgba(37,99,235,.1);
+}
+
+.login-btn{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:9px;
+  background:var(--primary);
+  color:#fff;
+  font-weight:bold;
+  font-size:16px;
+}
+
+.login-btn:hover{
+  background:var(--primary-dark);
 }
 
 .login-error{
+  display:none;
   background:#fee2e2;
   color:#991b1b;
   padding:10px;
   border-radius:8px;
   margin-bottom:15px;
+  text-align:center;
+}
+
+/* ================= ERP ================= */
+
+.erp{
+  display:none;
+  min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  width:260px;
+  background:var(--dark);
+  color:#fff;
+  overflow-y:auto;
+  z-index:100;
+}
+
+.sidebar-header{
+  padding:22px 18px;
+  border-bottom:1px solid #334155;
+}
+
+.sidebar-brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.sidebar-logo{
+  width:45px;
+  height:45px;
+  border-radius:10px;
+  background:var(--primary);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+}
+
+.sidebar-brand strong{
+  font-size:17px;
+}
+
+.sidebar-brand small{
+  display:block;
+  color:#94a3b8;
+  margin-top:3px;
+}
+
+.menu-title{
+  padding:18px 18px 8px;
+  color:#64748b;
+  font-size:11px;
+  text-transform:uppercase;
+  font-weight:bold;
+}
+
+.nav-item{
+  margin:3px 10px;
+}
+
+.nav-btn{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:#cbd5e1;
+  padding:11px 12px;
+  border-radius:8px;
+  text-align:left;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.nav-btn:hover{
+  background:#1e293b;
+  color:#fff;
+}
+
+.nav-btn.active{
+  background:var(--primary);
+  color:#fff;
+}
+
+.logout-btn{
+  margin:20px 10px;
+  width:calc(100% - 20px);
+  border:1px solid #475569;
+  background:transparent;
+  color:#cbd5e1;
+  padding:10px;
+  border-radius:8px;
+}
+
+.logout-btn:hover{
+  background:#dc2626;
+  border-color:#dc2626;
+  color:#fff;
+}
+
+/* MAIN */
+
+.main{
+  margin-left:260px;
+  min-height:100vh;
+}
+
+.topbar{
+  height:70px;
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 25px;
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+
+.topbar-title{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.user-info{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.user-avatar{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:var(--primary);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+}
+
+.content{
+  padding:25px;
+}
+
+/* MOBILE */
+
+.mobile-menu{
+  display:none;
+  border:0;
+  background:transparent;
+  font-size:24px;
+}
+
+@media(max-width:900px){
+
+  .sidebar{
+    transform:translateX(-100%);
+    transition:.25s;
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .mobile-menu{
+    display:block;
+  }
+
+  .content{
+    padding:15px;
+  }
+}
+
+/* ================= COMMON ================= */
+
+.page{
   display:none;
 }
 
-/* ================= BUTTONS ================= */
+.page.active{
+  display:block;
+}
+
+.page-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:20px;
+  flex-wrap:wrap;
+}
+
+.page-header h2{
+  font-size:23px;
+}
+
+.page-header p{
+  color:var(--muted);
+  margin-top:4px;
+}
 
 .btn{
   border:0;
   border-radius:8px;
-  padding:10px 16px;
+  padding:10px 15px;
   font-weight:bold;
-  transition:.2s;
 }
 
 .btn-primary{
@@ -175,227 +390,77 @@ button{
   color:#fff;
 }
 
-.btn-sm{
-  padding:7px 10px;
-  font-size:12px;
-}
-
-.full{
-  width:100%;
-}
-
-/* ================= ERP ================= */
-
-.erp{
-  min-height:100vh;
-  display:none;
-}
-
-.sidebar{
-  position:fixed;
-  left:0;
-  top:0;
-  bottom:0;
-  width:255px;
-  background:var(--dark);
-  color:#fff;
-  overflow-y:auto;
-  z-index:100;
-  transition:.3s;
-}
-
-.sidebar-header{
-  padding:22px 18px;
-  border-bottom:1px solid #334155;
-}
-
-.sidebar-brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.sidebar-logo{
-  width:45px;
-  height:45px;
-  border-radius:10px;
-  background:#2563eb;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:900;
-}
-
-.sidebar-header h2{
-  font-size:17px;
-}
-
-.sidebar-header small{
-  color:#94a3b8;
-}
-
-.menu-title{
-  padding:18px 18px 8px;
-  color:#64748b;
-  font-size:11px;
-  font-weight:bold;
-  text-transform:uppercase;
-}
-
-.menu-item{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  width:100%;
-  padding:12px 18px;
-  border:0;
-  background:transparent;
-  color:#cbd5e1;
-  text-align:left;
-}
-
-.menu-item:hover,
-.menu-item.active{
-  background:#1e293b;
-  color:#fff;
-}
-
-.menu-icon{
-  width:23px;
-  text-align:center;
-}
-
-.main{
-  margin-left:255px;
-  min-height:100vh;
-}
-
-.topbar{
-  height:70px;
+.card{
   background:#fff;
-  border-bottom:1px solid var(--border);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 25px;
-  position:sticky;
-  top:0;
-  z-index:50;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:20px;
 }
 
-.topbar-title{
-  font-size:20px;
-  font-weight:bold;
-}
-
-.topbar-right{
-  display:flex;
-  align-items:center;
-  gap:15px;
-}
-
-.user-badge{
-  background:#eff6ff;
-  color:#1d4ed8;
-  padding:8px 12px;
-  border-radius:20px;
-  font-weight:bold;
-  font-size:13px;
-}
-
-.content{
-  padding:25px;
-}
-
-/* ================= CARDS ================= */
-
-.page{
-  display:none;
-}
-
-.page.active{
-  display:block;
-}
-
-.page-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:20px;
-  gap:15px;
-}
-
-.page-header h1{
-  font-size:24px;
-}
-
-.page-header p{
-  color:var(--muted);
-  margin-top:5px;
-}
-
-.card-grid{
+.grid{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
   gap:18px;
-  margin-bottom:22px;
 }
+
+.grid-2{
+  grid-template-columns:repeat(2,1fr);
+}
+
+.grid-3{
+  grid-template-columns:repeat(3,1fr);
+}
+
+.grid-4{
+  grid-template-columns:repeat(4,1fr);
+}
+
+@media(max-width:1100px){
+  .grid-4{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:700px){
+  .grid-2,
+  .grid-3,
+  .grid-4{
+    grid-template-columns:1fr;
+  }
+}
+
+/* ================= STAT CARDS ================= */
 
 .stat-card{
   background:#fff;
   border:1px solid var(--border);
-  border-radius:14px;
+  border-radius:12px;
   padding:20px;
-  box-shadow:0 3px 10px rgba(15,23,42,.04);
-}
-
-.stat-card .icon{
-  width:42px;
-  height:42px;
-  border-radius:10px;
   display:flex;
+  justify-content:space-between;
   align-items:center;
-  justify-content:center;
-  background:#eff6ff;
-  color:#2563eb;
-  font-size:20px;
-  margin-bottom:15px;
 }
 
-.stat-card h3{
+.stat-label{
   color:var(--muted);
   font-size:13px;
   margin-bottom:7px;
 }
 
-.stat-card .value{
+.stat-value{
   font-size:25px;
   font-weight:bold;
 }
 
-.dashboard-grid{
-  display:grid;
-  grid-template-columns:2fr 1fr;
-  gap:20px;
-}
-
-.panel{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:20px;
-  margin-bottom:20px;
-}
-
-.panel-header{
+.stat-icon{
+  width:48px;
+  height:48px;
+  border-radius:12px;
+  background:#dbeafe;
+  color:#1d4ed8;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  margin-bottom:15px;
-}
-
-.panel-header h2{
-  font-size:17px;
+  justify-content:center;
+  font-size:22px;
 }
 
 /* ================= TABLE ================= */
@@ -412,7 +477,7 @@ table{
 
 th,
 td{
-  padding:12px;
+  padding:11px 10px;
   border-bottom:1px solid var(--border);
   text-align:left;
   font-size:13px;
@@ -420,18 +485,12 @@ td{
 
 th{
   background:#f8fafc;
-  font-size:12px;
-  text-transform:uppercase;
-  color:#475569;
-}
-
-tr:hover td{
-  background:#f8fafc;
+  font-weight:bold;
 }
 
 .badge{
   display:inline-block;
-  padding:5px 9px;
+  padding:5px 8px;
   border-radius:20px;
   font-size:11px;
   font-weight:bold;
@@ -442,14 +501,14 @@ tr:hover td{
   color:#166534;
 }
 
-.badge-danger{
-  background:#fee2e2;
-  color:#991b1b;
-}
-
 .badge-warning{
   background:#fef3c7;
   color:#92400e;
+}
+
+.badge-danger{
+  background:#fee2e2;
+  color:#991b1b;
 }
 
 /* ================= FORMS ================= */
@@ -457,13 +516,24 @@ tr:hover td{
 .form-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:16px;
+  gap:15px;
 }
 
 .form-grid-3{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:16px;
+  gap:15px;
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+@media(max-width:700px){
+  .form-grid,
+  .form-grid-3{
+    grid-template-columns:1fr;
+  }
 }
 
 .form-actions{
@@ -473,71 +543,36 @@ tr:hover td{
   flex-wrap:wrap;
 }
 
-.search-box{
-  margin-bottom:15px;
-}
+/* ================= DASHBOARD ================= */
 
-.search-box input{
-  width:100%;
-  padding:11px 13px;
-  border:1px solid #cbd5e1;
-  border-radius:8px;
-}
-
-/* ================= POS ================= */
-
-.pos-grid{
-  display:grid;
-  grid-template-columns:1.6fr 1fr;
-  gap:20px;
-}
-
-.product-search{
-  display:flex;
-  gap:10px;
-  margin-bottom:15px;
-}
-
-.product-search input{
-  flex:1;
-  padding:12px;
-  border:1px solid #cbd5e1;
-  border-radius:8px;
-}
-
-.cart-total{
-  background:#0f172a;
+.welcome{
+  background:linear-gradient(135deg,#1d4ed8,#0f172a);
   color:#fff;
-  padding:20px;
-  border-radius:12px;
-  margin-top:15px;
+  border-radius:14px;
+  padding:25px;
+  margin-bottom:20px;
 }
 
-.total-row{
-  display:flex;
-  justify-content:space-between;
-  padding:7px 0;
+.welcome h2{
+  font-size:25px;
+  margin-bottom:7px;
 }
 
-.total-row.final{
-  border-top:1px solid #475569;
-  margin-top:8px;
-  padding-top:15px;
-  font-size:20px;
-  font-weight:bold;
+.welcome p{
+  color:#dbeafe;
 }
 
 /* ================= MODAL ================= */
 
 .modal{
+  display:none;
   position:fixed;
   inset:0;
-  background:rgba(15,23,42,.6);
-  display:none;
+  background:rgba(15,23,42,.65);
+  z-index:300;
   align-items:center;
   justify-content:center;
   padding:20px;
-  z-index:500;
 }
 
 .modal.show{
@@ -545,12 +580,12 @@ tr:hover td{
 }
 
 .modal-box{
-  width:100%;
-  max-width:650px;
-  max-height:90vh;
-  overflow-y:auto;
   background:#fff;
-  border-radius:15px;
+  width:100%;
+  max-width:700px;
+  max-height:90vh;
+  overflow:auto;
+  border-radius:14px;
   padding:25px;
 }
 
@@ -561,109 +596,106 @@ tr:hover td{
   margin-bottom:20px;
 }
 
-/* ================= MOBILE ================= */
-
-.mobile-menu{
-  display:none;
+.close-btn{
   border:0;
-  background:transparent;
-  font-size:25px;
+  background:#f1f5f9;
+  width:35px;
+  height:35px;
+  border-radius:8px;
 }
 
-.overlay{
+/* ================= TOAST ================= */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#0f172a;
+  color:#fff;
+  padding:13px 18px;
+  border-radius:9px;
   display:none;
+  z-index:500;
 }
 
-@media(max-width:1100px){
-  .card-grid{
+.toast.show{
+  display:block;
+}
+
+/* ================= POS ================= */
+
+.pos-layout{
+  display:grid;
+  grid-template-columns:1.4fr .8fr;
+  gap:20px;
+}
+
+@media(max-width:900px){
+  .pos-layout{
+    grid-template-columns:1fr;
+  }
+}
+
+.product-search{
+  margin-bottom:15px;
+}
+
+.pos-products{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+@media(max-width:700px){
+  .pos-products{
     grid-template-columns:repeat(2,1fr);
   }
-
-  .dashboard-grid,
-  .pos-grid{
-    grid-template-columns:1fr;
-  }
 }
 
-@media(max-width:800px){
-  .sidebar{
-    transform:translateX(-100%);
-  }
-
-  .sidebar.open{
-    transform:translateX(0);
-  }
-
-  .main{
-    margin-left:0;
-  }
-
-  .mobile-menu{
-    display:block;
-  }
-
-  .overlay.show{
-    display:block;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.4);
-    z-index:90;
-  }
-
-  .content{
-    padding:15px;
-  }
-
-  .topbar{
-    padding:0 15px;
-  }
-
-  .topbar-title{
-    font-size:16px;
-  }
-
-  .form-grid,
-  .form-grid-3{
-    grid-template-columns:1fr;
-  }
+.pos-product{
+  border:1px solid var(--border);
+  padding:14px;
+  border-radius:10px;
+  cursor:pointer;
+  background:#fff;
 }
 
-@media(max-width:550px){
-  .card-grid{
-    grid-template-columns:1fr;
-  }
+.pos-product:hover{
+  border-color:var(--primary);
+  box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
 
-  .login-box{
-    padding:25px 20px;
-  }
+.pos-product strong{
+  display:block;
+  margin-bottom:6px;
+}
 
-  .page-header{
-    flex-direction:column;
-    align-items:flex-start;
-  }
+.pos-product small{
+  color:var(--muted);
 }
 
 /* ================= PRINT ================= */
 
 @media print{
+
   .sidebar,
   .topbar,
-  .no-print,
-  .page-header button{
-    display:none!important;
+  .page-header,
+  .btn,
+  .no-print{
+    display:none !important;
   }
 
   .main{
     margin-left:0;
   }
 
-  .content{
-    padding:0;
+  body{
+    background:#fff;
   }
 
-  .panel{
+  .card{
     border:0;
-    box-shadow:none;
   }
 }
 </style>
@@ -672,54 +704,53 @@ tr:hover td{
 <body>
 
 <!-- =========================================================
-LOGIN
+     LOGIN
 ========================================================= -->
 
 <div id="loginScreen" class="login-screen">
 
   <div class="login-box">
 
-    <div class="logo">SE</div>
+    <div class="login-logo">
+      SE
+    </div>
 
     <h1>SAAD Engineering ERP</h1>
 
-    <p>Professional ERP & POS Management System</p>
+    <div class="subtitle">
+      Professional ERP & POS Management System
+    </div>
 
     <div id="loginError" class="login-error">
-      Invalid username or password.
+      Invalid username or password
     </div>
 
-    <form id="loginForm">
-
-      <div class="form-group">
-        <label>Username</label>
-        <input
-          type="text"
-          id="loginUsername"
-          placeholder="Enter username"
-          required
-        >
-      </div>
-
-      <div class="form-group">
-        <label>Password</label>
-        <input
-          type="password"
-          id="loginPassword"
-          placeholder="Enter password"
-          required
-        >
-      </div>
-
-      <button class="btn btn-primary full" type="submit">
-        Login
-      </button>
-
-    </form>
-
-    <div style="text-align:center;margin-top:18px;color:#64748b;font-size:12px;">
-      Demo Login: <strong>admin</strong> / <strong>1234</strong>
+    <div class="form-group">
+      <label>Username</label>
+      <input
+        type="text"
+        id="loginUsername"
+        placeholder="Enter username"
+        value="admin"
+      >
     </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input
+        type="password"
+        id="loginPassword"
+        placeholder="Enter password"
+      >
+    </div>
+
+    <button class="login-btn" onclick="login()">
+      Login to ERP
+    </button>
+
+    <p style="text-align:center;margin-top:15px;color:#94a3b8;font-size:12px;">
+      SAAD Engineering © 2026
+    </p>
 
   </div>
 
@@ -727,1190 +758,1208 @@ LOGIN
 
 
 <!-- =========================================================
-ERP
+     ERP
 ========================================================= -->
 
 <div id="erp" class="erp">
 
-  <div id="overlay" class="overlay"></div>
+<!-- SIDEBAR -->
 
-  <!-- SIDEBAR -->
+<aside id="sidebar" class="sidebar">
 
-  <aside id="sidebar" class="sidebar">
+  <div class="sidebar-header">
 
-    <div class="sidebar-header">
+    <div class="sidebar-brand">
 
-      <div class="sidebar-brand">
+      <div class="sidebar-logo">
+        SE
+      </div>
 
-        <div class="sidebar-logo">
-          SE
+      <div>
+        <strong>SAAD Engineering</strong>
+        <small>ERP & POS</small>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="menu-title">
+    Main
+  </div>
+
+  <div class="nav-item">
+    <button class="nav-btn active" onclick="showPage('dashboard',this)">
+      📊 Dashboard
+    </button>
+  </div>
+
+
+  <div class="menu-title">
+    Master
+  </div>
+
+  <div class="nav-item">
+    <button class="nav-btn" onclick="showPage('products',this)">
+      📦 Product Master
+    </button>
+  </div>
+
+  <div class="nav-item">
+    <button class="nav-btn" onclick="showPage('customers',this)">
+      👥 Customer Master
+    </button>
+  </div>
+
+  <div class="nav-item">
+    <button class="nav-btn" onclick="showPage('suppliers',this)">
+      🏭 Supplier Master
+    </button>
+  </div>
+
+
+  <div class="menu-title">
+    Transactions
+  </div>
+
+  <div class="nav-item">
+    <button class="nav-btn" onclick="showPage('purchase',this)">
+      📥 Purchase / Stock In
+    </button>
+  </div>
+
+  <div class="nav-item">
+    <button class="nav-btn" onclick="showPage('pos',this)">
+      🛒 Sales / POS
+    </button>
+  </div>
+
+  <div class="nav-item">
+    <button class="nav-btn" onclick="showPage('quotation',this)">
+      📄 Quotation
+    </button>
+  </div>
+
+  <div class="nav-item">
+    <button class="nav-btn" onclick="showPage('invoice',this)">
+      🧾 Invoice
+    </button>
+  </div>
+
+  <div class="nav-item">
+    <button class="nav-btn" onclick="showPage('challan',this)">
+      🚚 Delivery Challan
+    </button>
+  </div>
+
+
+  <div class="menu-title">
+    Reports
+  </div>
+
+  <div class="nav-item">
+    <button class="nav-btn" onclick="showPage('reports',this)">
+      📈 Reports
+    </button>
+  </div>
+
+
+  <button class="logout-btn" onclick="logout()">
+    🚪 Logout
+  </button>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+  <header class="topbar">
+
+    <div style="display:flex;align-items:center;gap:15px;">
+
+      <button
+        class="mobile-menu"
+        onclick="toggleSidebar()"
+      >
+        ☰
+      </button>
+
+      <div id="topbarTitle" class="topbar-title">
+        Dashboard
+      </div>
+
+    </div>
+
+    <div class="user-info">
+
+      <div>
+        <strong>Administrator</strong>
+        <small style="display:block;color:#64748b;">
+          SAAD Engineering
+        </small>
+      </div>
+
+      <div class="user-avatar">
+        A
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <div class="content">
+
+
+<!-- =========================================================
+     DASHBOARD
+========================================================= -->
+
+<section id="page-dashboard" class="page active">
+
+  <div class="welcome">
+
+    <h2>
+      Welcome to SAAD Engineering ERP
+    </h2>
+
+    <p>
+      Manage generators, spare parts, transformers, compressors,
+      automation systems and business transactions from one place.
+    </p>
+
+  </div>
+
+
+  <div class="grid grid-4">
+
+    <div class="stat-card">
+
+      <div>
+        <div class="stat-label">
+          Today's Sales
         </div>
 
-        <div>
-          <h2>SAAD Engineering</h2>
-          <small>ERP & POS</small>
+        <div id="todaySales" class="stat-value">
+          ৳ 0
         </div>
+      </div>
+
+      <div class="stat-icon">
+        💰
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <div>
+        <div class="stat-label">
+          Total Sales
+        </div>
+
+        <div id="totalSales" class="stat-value">
+          ৳ 0
+        </div>
+      </div>
+
+      <div class="stat-icon">
+        📈
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <div>
+        <div class="stat-label">
+          Purchase
+        </div>
+
+        <div id="totalPurchase" class="stat-value">
+          ৳ 0
+        </div>
+      </div>
+
+      <div class="stat-icon">
+        📥
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <div>
+        <div class="stat-label">
+          Stock Value
+        </div>
+
+        <div id="stockValue" class="stat-value">
+          ৳ 0
+        </div>
+      </div>
+
+      <div class="stat-icon">
+        📦
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <br>
+
+
+  <div class="grid grid-3">
+
+    <div class="stat-card">
+
+      <div>
+        <div class="stat-label">
+          Products
+        </div>
+
+        <div id="productCount" class="stat-value">
+          0
+        </div>
+      </div>
+
+      <div class="stat-icon">
+        📦
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <div>
+        <div class="stat-label">
+          Customers
+        </div>
+
+        <div id="customerCount" class="stat-value">
+          0
+        </div>
+      </div>
+
+      <div class="stat-icon">
+        👥
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <div>
+        <div class="stat-label">
+          Low Stock Items
+        </div>
+
+        <div id="lowStockCount" class="stat-value">
+          0
+        </div>
+      </div>
+
+      <div class="stat-icon">
+        ⚠️
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <br>
+
+
+  <div class="grid grid-2">
+
+    <div class="card">
+
+      <h3 style="margin-bottom:15px;">
+        ⚠️ Low Stock Alert
+      </h3>
+
+      <div class="table-wrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Part No.</th>
+              <th>Product</th>
+              <th>Stock</th>
+              <th>Minimum</th>
+            </tr>
+
+          </thead>
+
+          <tbody id="lowStockTable"></tbody>
+
+        </table>
 
       </div>
 
     </div>
 
 
-    <div class="menu-title">Main</div>
+    <div class="card">
 
-    <button class="menu-item active" data-page="dashboard">
-      <span class="menu-icon">📊</span>
-      Dashboard
+      <h3 style="margin-bottom:15px;">
+        📋 Recent Sales
+      </h3>
+
+      <div class="table-wrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Invoice</th>
+              <th>Customer</th>
+              <th>Amount</th>
+            </tr>
+
+          </thead>
+
+          <tbody id="recentSalesTable"></tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     PRODUCT MASTER
+========================================================= -->
+
+<section id="page-products" class="page">
+
+  <div class="page-header">
+
+    <div>
+      <h2>Product Master</h2>
+      <p>Manage spare parts and products.</p>
+    </div>
+
+    <button
+      class="btn btn-primary"
+      onclick="openProductModal()"
+    >
+      + Add Product
+    </button>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="form-group">
+
+      <input
+        type="text"
+        id="productSearch"
+        placeholder="Search Product / Part Number / Brand..."
+        oninput="renderProducts()"
+      >
+
+    </div>
+
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Code</th>
+            <th>Part No.</th>
+            <th>Product Name</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Unit</th>
+            <th>Purchase</th>
+            <th>Sale</th>
+            <th>Stock</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="productsTable"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     CUSTOMERS
+========================================================= -->
+
+<section id="page-customers" class="page">
+
+  <div class="page-header">
+
+    <div>
+      <h2>Customer Master</h2>
+      <p>Manage customers and clients.</p>
+    </div>
+
+    <button
+      class="btn btn-primary"
+      onclick="openCustomerModal()"
+    >
+      + Add Customer
+    </button>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>ID</th>
+            <th>Customer Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Action</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="customersTable"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     SUPPLIERS
+========================================================= -->
+
+<section id="page-suppliers" class="page">
+
+  <div class="page-header">
+
+    <div>
+      <h2>Supplier Master</h2>
+      <p>Manage suppliers.</p>
+    </div>
+
+    <button
+      class="btn btn-primary"
+      onclick="openSupplierModal()"
+    >
+      + Add Supplier
+    </button>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>ID</th>
+            <th>Supplier</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Action</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="suppliersTable"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     PURCHASE
+========================================================= -->
+
+<section id="page-purchase" class="page">
+
+  <div class="page-header">
+
+    <div>
+      <h2>Purchase / Stock In</h2>
+      <p>Add purchased stock to inventory.</p>
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="form-grid-3">
+
+      <div class="form-group">
+
+        <label>Purchase No.</label>
+
+        <input
+          id="purchaseNo"
+          readonly
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Supplier</label>
+
+        <select id="purchaseSupplier"></select>
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Date</label>
+
+        <input
+          type="date"
+          id="purchaseDate"
+        >
+
+      </div>
+
+    </div>
+
+
+    <hr style="margin:15px 0;border:0;border-top:1px solid #e2e8f0;">
+
+
+    <div class="table-wrap">
+
+      <table id="purchaseItemsTable">
+
+        <thead>
+
+          <tr>
+            <th>Product</th>
+            <th>Part No.</th>
+            <th>Unit</th>
+            <th>Qty</th>
+            <th>Purchase Price</th>
+            <th>Total</th>
+            <th></th>
+          </tr>
+
+        </thead>
+
+        <tbody id="purchaseItems"></tbody>
+
+      </table>
+
+    </div>
+
+
+    <button
+      class="btn btn-secondary"
+      onclick="addPurchaseRow()"
+      style="margin-top:12px;"
+    >
+      + Add Item
     </button>
 
 
-    <div class="menu-title">Master</div>
+    <div style="text-align:right;margin-top:20px;">
 
-    <button class="menu-item" data-page="products">
-      <span class="menu-icon">📦</span>
-      Product Master
-    </button>
+      <strong>
+        Grand Total:
+        <span id="purchaseTotal">
+          ৳ 0
+        </span>
+      </strong>
 
-    <button class="menu-item" data-page="customers">
-      <span class="menu-icon">👤</span>
-      Customer Master
-    </button>
-
-    <button class="menu-item" data-page="suppliers">
-      <span class="menu-icon">🚚</span>
-      Supplier Master
-    </button>
+    </div>
 
 
-    <div class="menu-title">Transactions</div>
-
-    <button class="menu-item" data-page="purchase">
-      <span class="menu-icon">📥</span>
-      Purchase / Stock In
-    </button>
-
-    <button class="menu-item" data-page="sales">
-      <span class="menu-icon">💰</span>
-      Sales / POS
-    </button>
-
-    <button class="menu-item" data-page="quotation">
-      <span class="menu-icon">📄</span>
-      Quotation
-    </button>
-
-    <button class="menu-item" data-page="invoice">
-      <span class="menu-icon">🧾</span>
-      Invoice
-    </button>
-
-    <button class="menu-item" data-page="challan">
-      <span class="menu-icon">🚛</span>
-      Delivery Challan
-    </button>
-
-
-    <div class="menu-title">Reports</div>
-
-    <button class="menu-item" data-page="reports">
-      <span class="menu-icon">📈</span>
-      Reports
-    </button>
-
-
-    <div style="padding:20px 18px;">
+    <div class="form-actions">
 
       <button
-        class="btn btn-danger full"
-        id="logoutBtn"
+        class="btn btn-success"
+        onclick="savePurchase()"
       >
-        Logout
+        Save Purchase
+      </button>
+
+      <button
+        class="btn btn-secondary"
+        onclick="resetPurchase()"
+      >
+        Reset
       </button>
 
     </div>
 
-  </aside>
+  </div>
+
+</section>
 
 
-  <!-- MAIN -->
+<!-- =========================================================
+     POS
+========================================================= -->
 
-  <main class="main">
+<section id="page-pos" class="page">
 
-    <header class="topbar">
+  <div class="page-header">
 
-      <div style="display:flex;align-items:center;gap:12px;">
+    <div>
+      <h2>Sales / POS</h2>
+      <p>Create sales invoices.</p>
+    </div>
 
-        <button id="mobileMenu" class="mobile-menu">
-          ☰
-        </button>
+  </div>
 
-        <div class="topbar-title" id="pageTitle">
-          Dashboard
+
+  <div class="pos-layout">
+
+    <div class="card">
+
+      <div class="product-search">
+
+        <input
+          type="text"
+          id="posSearch"
+          placeholder="Search product..."
+          oninput="renderPOSProducts()"
+          style="width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;"
+        >
+
+      </div>
+
+      <div id="posProducts" class="pos-products"></div>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3 style="margin-bottom:15px;">
+        🛒 Current Sale
+      </h3>
+
+      <div class="form-group">
+
+        <label>Customer</label>
+
+        <select id="posCustomer"></select>
+
+      </div>
+
+
+      <div class="table-wrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Product</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+
+          </thead>
+
+          <tbody id="cartTable"></tbody>
+
+        </table>
+
+      </div>
+
+
+      <div style="margin-top:20px;">
+
+        <div style="display:flex;justify-content:space-between;">
+          <span>Subtotal</span>
+          <strong id="cartSubtotal">৳ 0</strong>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;margin-top:8px;">
+          <span>Discount</span>
+
+          <input
+            id="cartDiscount"
+            type="number"
+            value="0"
+            min="0"
+            oninput="updateCartTotal()"
+            style="width:100px;padding:6px;"
+          >
+        </div>
+
+        <hr style="margin:12px 0;border:0;border-top:1px solid #e2e8f0;">
+
+        <div style="display:flex;justify-content:space-between;font-size:20px;">
+          <strong>Total</strong>
+          <strong id="cartTotal">৳ 0</strong>
         </div>
 
       </div>
 
-      <div class="topbar-right">
 
-        <span id="currentDateTime">
-          Loading...
+      <button
+        class="btn btn-success"
+        style="width:100%;margin-top:18px;"
+        onclick="completeSale()"
+      >
+        Complete Sale
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     QUOTATION
+========================================================= -->
+
+<section id="page-quotation" class="page">
+
+  <div class="page-header">
+
+    <div>
+      <h2>Quotation</h2>
+      <p>Create customer quotation.</p>
+    </div>
+
+    <button
+      class="btn btn-primary"
+      onclick="printQuotation()"
+    >
+      🖨️ Print
+    </button>
+
+  </div>
+
+
+  <div class="card" id="quotationPrint">
+
+    <div style="text-align:center;margin-bottom:25px;">
+
+      <h1>
+        SAAD ENGINEERING
+      </h1>
+
+      <p>
+        Generator • Spare Parts • Transformer • Automation
+      </p>
+
+      <h2 style="margin-top:15px;">
+        QUOTATION
+      </h2>
+
+    </div>
+
+
+    <div class="form-grid-3">
+
+      <div class="form-group">
+        <label>Quotation No.</label>
+        <input id="quotationNo">
+      </div>
+
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" id="quotationDate">
+      </div>
+
+      <div class="form-group">
+        <label>Customer</label>
+        <input id="quotationCustomer">
+      </div>
+
+    </div>
+
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>SL</th>
+            <th>Description</th>
+            <th>Part No.</th>
+            <th>Qty</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="quotationItems">
+
+          <tr>
+            <td>1</td>
+            <td><input class="q-desc" placeholder="Description"></td>
+            <td><input class="q-part" placeholder="Part No."></td>
+            <td><input class="q-qty" type="number" value="1"></td>
+            <td><input class="q-price" type="number" value="0"></td>
+            <td class="q-total">৳ 0</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <button
+      class="btn btn-secondary no-print"
+      onclick="addQuotationRow()"
+      style="margin-top:12px;"
+    >
+      + Add Item
+    </button>
+
+
+    <div style="text-align:right;margin-top:20px;">
+
+      <strong>
+        Grand Total:
+        <span id="quotationTotal">
+          ৳ 0
         </span>
+      </strong>
 
-        <span class="user-badge">
-          👤 Admin
-        </span>
+    </div>
 
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     INVOICE
+========================================================= -->
+
+<section id="page-invoice" class="page">
+
+  <div class="page-header">
+
+    <div>
+      <h2>Invoice</h2>
+      <p>Sales invoice management.</p>
+    </div>
+
+    <button
+      class="btn btn-primary"
+      onclick="window.print()"
+    >
+      🖨️ Print Invoice
+    </button>
+
+  </div>
+
+
+  <div class="card">
+
+    <div style="text-align:center;">
+
+      <h1>
+        SAAD ENGINEERING
+      </h1>
+
+      <p>
+        Professional Engineering & Power Solution
+      </p>
+
+      <h2 style="margin-top:15px;">
+        INVOICE
+      </h2>
+
+    </div>
+
+
+    <div class="form-grid-3" style="margin-top:25px;">
+
+      <div class="form-group">
+        <label>Invoice No.</label>
+        <input id="invoiceNo">
       </div>
 
-    </header>
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" id="invoiceDate">
+      </div>
 
+      <div class="form-group">
+        <label>Customer</label>
+        <input id="invoiceCustomer">
+      </div>
 
-    <section class="content">
+    </div>
 
 
-      <!-- =====================================================
-      DASHBOARD
-      ===================================================== -->
+    <div class="card" style="background:#f8fafc;">
 
-      <div id="page-dashboard" class="page active">
+      <p>
+        Invoice generated from SAAD Engineering ERP.
+      </p>
 
-        <div class="page-header">
+    </div>
 
-          <div>
-            <h1>SAAD Engineering ERP</h1>
-            <p>Business overview and management dashboard</p>
-          </div>
+  </div>
 
-        </div>
+</section>
 
 
-        <div class="card-grid">
+<!-- =========================================================
+     CHALLAN
+========================================================= -->
 
-          <div class="stat-card">
+<section id="page-challan" class="page">
 
-            <div class="icon">💰</div>
+  <div class="page-header">
 
-            <h3>Today Sales</h3>
+    <div>
+      <h2>Delivery Challan</h2>
+      <p>Prepare delivery documents.</p>
+    </div>
 
-            <div class="value" id="statTodaySales">
-              ৳0
-            </div>
+    <button
+      class="btn btn-primary"
+      onclick="window.print()"
+    >
+      🖨️ Print Challan
+    </button>
 
-          </div>
+  </div>
 
 
-          <div class="stat-card">
+  <div class="card">
 
-            <div class="icon">📈</div>
+    <div style="text-align:center;">
 
-            <h3>Total Sales</h3>
+      <h1>
+        SAAD ENGINEERING
+      </h1>
 
-            <div class="value" id="statTotalSales">
-              ৳0
-            </div>
+      <h2 style="margin-top:12px;">
+        DELIVERY CHALLAN
+      </h2>
 
-          </div>
+    </div>
 
 
-          <div class="stat-card">
+    <div class="form-grid-3" style="margin-top:25px;">
 
-            <div class="icon">📥</div>
+      <div class="form-group">
 
-            <h3>Total Purchase</h3>
+        <label>Challan No.</label>
 
-            <div class="value" id="statTotalPurchase">
-              ৳0
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="icon">📦</div>
-
-            <h3>Stock Value</h3>
-
-            <div class="value" id="statStockValue">
-              ৳0
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="card-grid">
-
-          <div class="stat-card">
-
-            <div class="icon">⚠️</div>
-
-            <h3>Low Stock Items</h3>
-
-            <div class="value" id="statLowStock">
-              0
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="icon">👤</div>
-
-            <h3>Customers</h3>
-
-            <div class="value" id="statCustomers">
-              0
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="icon">🚚</div>
-
-            <h3>Suppliers</h3>
-
-            <div class="value" id="statSuppliers">
-              0
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="icon">📦</div>
-
-            <h3>Total Products</h3>
-
-            <div class="value" id="statProducts">
-              0
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="dashboard-grid">
-
-          <div class="panel">
-
-            <div class="panel-header">
-
-              <h2>Recent Sales</h2>
-
-              <button
-                class="btn btn-secondary btn-sm"
-                onclick="showPage('sales')"
-              >
-                View Sales
-              </button>
-
-            </div>
-
-            <div class="table-wrap">
-
-              <table>
-
-                <thead>
-                  <tr>
-                    <th>Invoice</th>
-                    <th>Customer</th>
-                    <th>Date</th>
-                    <th>Total</th>
-                  </tr>
-                </thead>
-
-                <tbody id="recentSalesTable">
-                </tbody>
-
-              </table>
-
-            </div>
-
-          </div>
-
-
-          <div class="panel">
-
-            <div class="panel-header">
-              <h2>Low Stock Alert</h2>
-            </div>
-
-            <div id="lowStockList">
-            </div>
-
-          </div>
-
-        </div>
+        <input id="challanNo">
 
       </div>
 
 
-      <!-- =====================================================
-      PRODUCTS
-      ===================================================== -->
+      <div class="form-group">
 
-      <div id="page-products" class="page">
+        <label>Date</label>
 
-        <div class="page-header">
-
-          <div>
-            <h1>Product Master</h1>
-            <p>Manage generator and spare parts inventory</p>
-          </div>
-
-          <button
-            class="btn btn-primary"
-            onclick="openProductModal()"
-          >
-            + Add Product
-          </button>
-
-        </div>
-
-
-        <div class="panel">
-
-          <div class="search-box">
-
-            <input
-              id="productSearch"
-              placeholder="Search product, part number, brand..."
-              oninput="renderProducts()"
-            >
-
-          </div>
-
-
-          <div class="table-wrap">
-
-            <table>
-
-              <thead>
-
-                <tr>
-                  <th>Code</th>
-                  <th>Part No.</th>
-                  <th>Product Name</th>
-                  <th>Brand</th>
-                  <th>Category</th>
-                  <th>Unit</th>
-                  <th>Purchase</th>
-                  <th>Sale</th>
-                  <th>Stock</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-
-              </thead>
-
-              <tbody id="productsTable">
-              </tbody>
-
-            </table>
-
-          </div>
-
-        </div>
+        <input type="date" id="challanDate">
 
       </div>
 
 
-      <!-- =====================================================
-      CUSTOMERS
-      ===================================================== -->
+      <div class="form-group">
 
-      <div id="page-customers" class="page">
+        <label>Customer</label>
 
-        <div class="page-header">
-
-          <div>
-            <h1>Customer Master</h1>
-            <p>Manage customers and business clients</p>
-          </div>
-
-          <button
-            class="btn btn-primary"
-            onclick="openCustomerModal()"
-          >
-            + Add Customer
-          </button>
-
-        </div>
-
-
-        <div class="panel">
-
-          <div class="table-wrap">
-
-            <table>
-
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Customer Name</th>
-                  <th>Company</th>
-                  <th>Phone</th>
-                  <th>Email</th>
-                  <th>Address</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-
-              <tbody id="customersTable">
-              </tbody>
-
-            </table>
-
-          </div>
-
-        </div>
+        <input id="challanCustomer">
 
       </div>
 
+    </div>
 
-      <!-- =====================================================
-      SUPPLIERS
-      ===================================================== -->
 
-      <div id="page-suppliers" class="page">
+    <div class="form-group">
 
-        <div class="page-header">
+      <label>Delivery Address</label>
 
-          <div>
-            <h1>Supplier Master</h1>
-            <p>Manage suppliers and vendors</p>
-          </div>
+      <textarea
+        id="challanAddress"
+        rows="3"
+      ></textarea>
 
-          <button
-            class="btn btn-primary"
-            onclick="openSupplierModal()"
-          >
-            + Add Supplier
-          </button>
+    </div>
 
-        </div>
+  </div>
 
+</section>
 
-        <div class="panel">
 
-          <div class="table-wrap">
+<!-- =========================================================
+     REPORTS
+========================================================= -->
 
-            <table>
+<section id="page-reports" class="page">
 
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Supplier Name</th>
-                  <th>Company</th>
-                  <th>Phone</th>
-                  <th>Email</th>
-                  <th>Address</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
+  <div class="page-header">
 
-              <tbody id="suppliersTable">
-              </tbody>
+    <div>
+      <h2>Reports</h2>
+      <p>Business and inventory reports.</p>
+    </div>
 
-            </table>
+    <button
+      class="btn btn-primary"
+      onclick="window.print()"
+    >
+      🖨️ Print Report
+    </button>
 
-          </div>
+  </div>
 
-        </div>
 
-      </div>
+  <div class="grid grid-3">
 
+    <div class="card">
 
-      <!-- =====================================================
-      PURCHASE
-      ===================================================== -->
+      <h3>Sales Report</h3>
 
-      <div id="page-purchase" class="page">
+      <p style="font-size:25px;font-weight:bold;margin-top:10px;"
+         id="reportSales">
+        ৳ 0
+      </p>
 
-        <div class="page-header">
+    </div>
 
-          <div>
-            <h1>Purchase / Stock In</h1>
-            <p>Record purchase and increase inventory</p>
-          </div>
 
-        </div>
+    <div class="card">
 
+      <h3>Purchase Report</h3>
 
-        <div class="panel">
+      <p style="font-size:25px;font-weight:bold;margin-top:10px;"
+         id="reportPurchase">
+        ৳ 0
+      </p>
 
-          <div class="form-grid">
+    </div>
 
-            <div class="form-group">
-              <label>Purchase No.</label>
-              <input id="purchaseNo" readonly>
-            </div>
 
-            <div class="form-group">
-              <label>Date</label>
-              <input type="date" id="purchaseDate">
-            </div>
+    <div class="card">
 
-            <div class="form-group">
-              <label>Supplier</label>
-              <select id="purchaseSupplier">
-              </select>
-            </div>
+      <h3>Stock Report</h3>
 
-            <div class="form-group">
-              <label>Reference</label>
-              <input id="purchaseReference" placeholder="Reference / PO No.">
-            </div>
+      <p style="font-size:25px;font-weight:bold;margin-top:10px;"
+         id="reportStock">
+        ৳ 0
+      </p>
 
-          </div>
+    </div>
 
+  </div>
 
-          <hr style="border:0;border-top:1px solid #e2e8f0;margin:20px 0;">
 
+  <br>
 
-          <div class="form-grid-3">
 
-            <div class="form-group">
-              <label>Product</label>
-              <select id="purchaseProduct">
-              </select>
-            </div>
+  <div class="card">
 
-            <div class="form-group">
-              <label>Quantity</label>
-              <input type="number" id="purchaseQty" min="1" value="1">
-            </div>
+    <h3 style="margin-bottom:15px;">
+      📦 Current Stock
+    </h3>
 
-            <div class="form-group">
-              <label>Purchase Price</label>
-              <input type="number" id="purchasePrice" min="0" value="0">
-            </div>
+    <div class="table-wrap">
 
-          </div>
+      <table>
 
+        <thead>
 
-          <button
-            class="btn btn-primary"
-            onclick="addPurchase()"
-          >
-            Add Purchase
-          </button>
+          <tr>
+            <th>Code</th>
+            <th>Part No.</th>
+            <th>Product</th>
+            <th>Brand</th>
+            <th>Purchase Price</th>
+            <th>Sale Price</th>
+            <th>Stock</th>
+            <th>Stock Value</th>
+          </tr>
 
-        </div>
+        </thead>
 
-      </div>
+        <tbody id="stockReportTable"></tbody>
 
+      </table>
 
-      <!-- =====================================================
-      SALES POS
-      ===================================================== -->
+    </div>
 
-      <div id="page-sales" class="page">
+  </div>
 
-        <div class="page-header">
+</section>
 
-          <div>
-            <h1>Sales / POS</h1>
-            <p>Create sales invoices and deduct stock</p>
-          </div>
 
-          <button
-            class="btn btn-secondary"
-            onclick="clearCart()"
-          >
-            Clear Cart
-          </button>
+  </div>
 
-        </div>
-
-
-        <div class="pos-grid">
-
-          <div class="panel">
-
-            <div class="product-search">
-
-              <select id="posProduct" style="flex:1;padding:12px;border:1px solid #cbd5e1;border-radius:8px;">
-              </select>
-
-              <input
-                type="number"
-                id="posQty"
-                value="1"
-                min="1"
-                style="max-width:100px;"
-                placeholder="Qty"
-              >
-
-              <button
-                class="btn btn-primary"
-                onclick="addToCart()"
-              >
-                Add
-              </button>
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>Customer</label>
-
-              <select id="posCustomer">
-              </select>
-
-            </div>
-
-
-            <div class="table-wrap">
-
-              <table>
-
-                <thead>
-                  <tr>
-                    <th>Product</th>
-                    <th>Qty</th>
-                    <th>Price</th>
-                    <th>Total</th>
-                    <th></th>
-                  </tr>
-                </thead>
-
-                <tbody id="cartTable">
-                </tbody>
-
-              </table>
-
-            </div>
-
-          </div>
-
-
-          <div>
-
-            <div class="panel">
-
-              <h2 style="margin-bottom:15px;">
-                Invoice Summary
-              </h2>
-
-              <div class="form-group">
-
-                <label>Invoice No.</label>
-
-                <input id="salesInvoiceNo" readonly>
-
-              </div>
-
-              <div class="form-group">
-
-                <label>Discount</label>
-
-                <input
-                  type="number"
-                  id="salesDiscount"
-                  value="0"
-                  min="0"
-                  oninput="updateCartTotal()"
-                >
-
-              </div>
-
-              <div class="form-group">
-
-                <label>VAT / Tax %</label>
-
-                <input
-                  type="number"
-                  id="salesVat"
-                  value="0"
-                  min="0"
-                  oninput="updateCartTotal()"
-                >
-
-              </div>
-
-
-              <div class="cart-total">
-
-                <div class="total-row">
-                  <span>Subtotal</span>
-                  <strong id="cartSubtotal">৳0</strong>
-                </div>
-
-                <div class="total-row">
-                  <span>Discount</span>
-                  <strong id="cartDiscount">৳0</strong>
-                </div>
-
-                <div class="total-row">
-                  <span>VAT / Tax</span>
-                  <strong id="cartVat">৳0</strong>
-                </div>
-
-                <div class="total-row final">
-                  <span>Total</span>
-                  <strong id="cartGrandTotal">৳0</strong>
-                </div>
-
-              </div>
-
-
-              <button
-                class="btn btn-success full"
-                style="margin-top:15px;"
-                onclick="completeSale()"
-              >
-                Complete Sale
-              </button>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- =====================================================
-      QUOTATION
-      ===================================================== -->
-
-      <div id="page-quotation" class="page">
-
-        <div class="page-header">
-
-          <div>
-            <h1>Quotation</h1>
-            <p>Create professional customer quotations</p>
-          </div>
-
-          <button
-            class="btn btn-primary"
-            onclick="printCurrentPage()"
-          >
-            🖨 Print
-          </button>
-
-        </div>
-
-
-        <div class="panel">
-
-          <div class="form-grid">
-
-            <div class="form-group">
-              <label>Quotation No.</label>
-              <input id="quotationNo" readonly>
-            </div>
-
-            <div class="form-group">
-              <label>Date</label>
-              <input type="date" id="quotationDate">
-            </div>
-
-            <div class="form-group">
-              <label>Customer</label>
-              <select id="quotationCustomer">
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label>Validity</label>
-              <input value="30 Days" id="quotationValidity">
-            </div>
-
-          </div>
-
-
-          <div class="form-group">
-            <label>Quotation Details</label>
-            <textarea id="quotationDetails" placeholder="Enter quotation details..."></textarea>
-          </div>
-
-
-          <div class="form-actions">
-
-            <button class="btn btn-primary">
-              Save Quotation
-            </button>
-
-            <button
-              class="btn btn-secondary"
-              onclick="printCurrentPage()"
-            >
-              Print Quotation
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- =====================================================
-      INVOICE
-      ===================================================== -->
-
-      <div id="page-invoice" class="page">
-
-        <div class="page-header">
-
-          <div>
-            <h1>Invoice</h1>
-            <p>Professional sales invoice</p>
-          </div>
-
-          <button
-            class="btn btn-primary"
-            onclick="printInvoice()"
-          >
-            🖨 Print Invoice
-          </button>
-
-        </div>
-
-
-        <div class="panel" id="invoicePrintArea">
-
-          <div style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:25px;">
-
-            <div>
-
-              <h1 style="color:#1d4ed8;">
-                SAAD Engineering
-              </h1>
-
-              <p style="color:#64748b;">
-                Generator, Spare Parts & Automation
-              </p>
-
-            </div>
-
-            <div style="text-align:right;">
-
-              <h2>INVOICE</h2>
-
-              <p>
-                Invoice No:
-                <strong id="printInvoiceNo">INV-000001</strong>
-              </p>
-
-              <p>
-                Date:
-                <strong id="printInvoiceDate"></strong>
-              </p>
-
-            </div>
-
-          </div>
-
-
-          <hr style="border:0;border-top:1px solid #e2e8f0;margin-bottom:20px;">
-
-
-          <div class="form-grid">
-
-            <div>
-
-              <strong>Bill To:</strong>
-
-              <p id="printCustomer">
-                Customer
-              </p>
-
-            </div>
-
-            <div>
-
-              <strong>Company:</strong>
-
-              <p>
-                SAAD Engineering
-              </p>
-
-            </div>
-
-          </div>
-
-
-          <div style="margin-top:30px;">
-
-            <div class="table-wrap">
-
-              <table>
-
-                <thead>
-                  <tr>
-                    <th>SL</th>
-                    <th>Description</th>
-                    <th>Qty</th>
-                    <th>Unit Price</th>
-                    <th>Total</th>
-                  </tr>
-                </thead>
-
-                <tbody id="invoiceItems">
-                </tbody>
-
-              </table>
-
-            </div>
-
-          </div>
-
-
-          <div style="max-width:350px;margin-left:auto;margin-top:20px;">
-
-            <div class="total-row">
-              <span>Subtotal</span>
-              <strong id="invoiceSubtotal">৳0</strong>
-            </div>
-
-            <div class="total-row">
-              <span>Discount</span>
-              <strong id="invoiceDiscount">৳0</strong>
-            </div>
-
-            <div class="total-row">
-              <span>VAT</span>
-              <strong id="invoiceVat">৳0</strong>
-            </div>
-
-            <div class="total-row final">
-              <span>Grand Total</span>
-              <strong id="invoiceGrandTotal">৳0</strong>
-            </div>
-
-          </div>
-
-
-          <div style="margin-top:50px;text-align:right;">
-            Authorized Signature
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- =====================================================
-      CHALLAN
-      ===================================================== -->
-
-      <div id="page-challan" class="page">
-
-        <div class="page-header">
-
-          <div>
-            <h1>Delivery Challan</h1>
-            <p>Prepare delivery documentation</p>
-          </div>
-
-          <button
-            class="btn btn-primary"
-            onclick="printCurrentPage()"
-          >
-            🖨 Print
-          </button>
-
-        </div>
-
-
-        <div class="panel">
-
-          <div class="form-grid">
-
-            <div class="form-group">
-              <label>Challan No.</label>
-              <input id="challanNo" readonly>
-            </div>
-
-            <div class="form-group">
-              <label>Date</label>
-              <input type="date" id="challanDate">
-            </div>
-
-            <div class="form-group">
-              <label>Customer</label>
-              <select id="challanCustomer">
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label>Vehicle / Courier</label>
-              <input id="challanVehicle">
-            </div>
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>Delivery Details</label>
-
-            <textarea
-              id="challanDetails"
-              placeholder="Enter delivered products / equipment details..."
-            ></textarea>
-
-          </div>
-
-
-          <div class="form-actions">
-
-            <button class="btn btn-success">
-              Save Challan
-            </button>
-
-            <button
-              class="btn btn-secondary"
-              onclick="printCurrentPage()"
-            >
-              Print Challan
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- =====================================================
-      REPORTS
-      ===================================================== -->
-
-      <div id="page-reports" class="page">
-
-        <div class="page-header">
-
-          <div>
-            <h1>Reports</h1>
-            <p>Business and inventory reports</p>
-          </div>
-
-          <button
-            class="btn btn-primary"
-            onclick="window.print()"
-          >
-            🖨 Print
-          </button>
-
-        </div>
-
-
-        <div class="card-grid">
-
-          <div class="stat-card">
-            <h3>Total Sales</h3>
-            <div class="value" id="reportSales">৳0</div>
-          </div>
-
-          <div class="stat-card">
-            <h3>Total Purchase</h3>
-            <div class="value" id="reportPurchase">৳0</div>
-          </div>
-
-          <div class="stat-card">
-            <h3>Gross Profit</h3>
-            <div class="value" id="reportProfit">৳0</div>
-          </div>
-
-          <div class="stat-card">
-            <h3>Stock Value</h3>
-            <div class="value" id="reportStock">৳0</div>
-          </div>
-
-        </div>
-
-
-        <div class="panel">
-
-          <div class="panel-header">
-
-            <h2>Sales Report</h2>
-
-          </div>
-
-          <div class="table-wrap">
-
-            <table>
-
-              <thead>
-
-                <tr>
-                  <th>Invoice</th>
-                  <th>Customer</th>
-                  <th>Date</th>
-                  <th>Items</th>
-                  <th>Total</th>
-                </tr>
-
-              </thead>
-
-              <tbody id="salesReportTable">
-              </tbody>
-
-            </table>
-
-          </div>
-
-        </div>
-
-
-        <div class="panel">
-
-          <div class="panel-header">
-            <h2>Stock Report</h2>
-          </div>
-
-          <div class="table-wrap">
-
-            <table>
-
-              <thead>
-
-                <tr>
-                  <th>Part No.</th>
-                  <th>Product</th>
-                  <th>Brand</th>
-                  <th>Stock</th>
-                  <th>Purchase Value</th>
-                  <th>Stock Value</th>
-                </tr>
-
-              </thead>
-
-              <tbody id="stockReportTable">
-              </tbody>
-
-            </table>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
+</main>
 
 </div>
 
 
 <!-- =========================================================
-PRODUCT MODAL
+     PRODUCT MODAL
 ========================================================= -->
 
 <div id="productModal" class="modal">
@@ -1919,10 +1968,10 @@ PRODUCT MODAL
 
     <div class="modal-header">
 
-      <h2>Add Product</h2>
+      <h3>Add Product</h3>
 
       <button
-        class="btn btn-secondary"
+        class="close-btn"
         onclick="closeModal('productModal')"
       >
         ✕
@@ -1934,14 +1983,2532 @@ PRODUCT MODAL
     <div class="form-grid">
 
       <div class="form-group">
+
+        <label>Product Code</label>
+
+        <input
+          id="productCode"
+          readonly
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
         <label>Part Number</label>
-        <input id="productPartNo" placeholder="e.g. FF5479">
+
+        <input
+          id="productPart"
+          placeholder="Example: FF5479"
+        >
+
       </div>
 
-      <div class="form-group">
+
+      <div class="form-group full">
+
         <label>Product Name</label>
-        <input id="productName" placeholder="Product name">
+
+        <input
+          id="productName"
+          placeholder="Product name"
+        >
+
       </div>
 
+
       <div class="form-group">
-        <label>Brand
+
+        <label>Brand</label>
+
+        <input
+          id="productBrand"
+          placeholder="Perkins / Cummins / Volvo"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Category</label>
+
+        <select id="productCategory">
+
+          <option>Generator Parts</option>
+          <option>Engine Parts</option>
+          <option>Filter</option>
+          <option>Oil</option>
+          <option>Electrical</option>
+          <option>Automation</option>
+          <option>Transformer</option>
+          <option>Compressor</option>
+          <option>Other</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Unit</label>
+
+        <select id="productUnit">
+
+          <option>PCS</option>
+          <option>SET</option>
+          <option>LTR</option>
+          <option>KG</option>
+          <option>METER</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Purchase Price</label>
+
+        <input
+          id="productPurchase"
+          type="number"
+          min="0"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Selling Price</label>
+
+        <input
+          id="productSale"
+          type="number"
+          min="0"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Opening Stock</label>
+
+        <input
+          id="productStock"
+          type="number"
+          min="0"
+          value="0"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Minimum Stock</label>
+
+        <input
+          id="productMinimum"
+          type="number"
+          min="0"
+          value="5"
+        >
+
+      </div>
+
+    </div>
+
+
+    <div class="form-actions">
+
+      <button
+        class="btn btn-primary"
+        onclick="saveProduct()"
+      >
+        Save Product
+      </button>
+
+      <button
+        class="btn btn-secondary"
+        onclick="closeModal('productModal')"
+      >
+        Cancel
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- CUSTOMER MODAL -->
+
+<div id="customerModal" class="modal">
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+
+      <h3>Add Customer</h3>
+
+      <button
+        class="close-btn"
+        onclick="closeModal('customerModal')"
+      >
+        ✕
+      </button>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <div class="form-group full">
+
+        <label>Customer Name</label>
+
+        <input id="customerName">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Phone</label>
+
+        <input id="customerPhone">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Email</label>
+
+        <input id="customerEmail">
+
+      </div>
+
+
+      <div class="form-group full">
+
+        <label>Address</label>
+
+        <textarea
+          id="customerAddress"
+          rows="3"
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <div class="form-actions">
+
+      <button
+        class="btn btn-primary"
+        onclick="saveCustomer()"
+      >
+        Save Customer
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- SUPPLIER MODAL -->
+
+<div id="supplierModal" class="modal">
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+
+      <h3>Add Supplier</h3>
+
+      <button
+        class="close-btn"
+        onclick="closeModal('supplierModal')"
+      >
+        ✕
+      </button>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <div class="form-group full">
+
+        <label>Supplier Name</label>
+
+        <input id="supplierName">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Phone</label>
+
+        <input id="supplierPhone">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Email</label>
+
+        <input id="supplierEmail">
+
+      </div>
+
+
+      <div class="form-group full">
+
+        <label>Address</label>
+
+        <textarea
+          id="supplierAddress"
+          rows="3"
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <div class="form-actions">
+
+      <button
+        class="btn btn-primary"
+        onclick="saveSupplier()"
+      >
+        Save Supplier
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+/* =========================================================
+   DATA
+========================================================= */
+
+let products =
+  JSON.parse(localStorage.getItem("saad_products")) || [];
+
+let customers =
+  JSON.parse(localStorage.getItem("saad_customers")) || [];
+
+let suppliers =
+  JSON.parse(localStorage.getItem("saad_suppliers")) || [];
+
+let sales =
+  JSON.parse(localStorage.getItem("saad_sales")) || [];
+
+let purchases =
+  JSON.parse(localStorage.getItem("saad_purchases")) || [];
+
+let cart = [];
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function saveData(){
+
+  localStorage.setItem(
+    "saad_products",
+    JSON.stringify(products)
+  );
+
+  localStorage.setItem(
+    "saad_customers",
+    JSON.stringify(customers)
+  );
+
+  localStorage.setItem(
+    "saad_suppliers",
+    JSON.stringify(suppliers)
+  );
+
+  localStorage.setItem(
+    "saad_sales",
+    JSON.stringify(sales)
+  );
+
+  localStorage.setItem(
+    "saad_purchases",
+    JSON.stringify(purchases)
+  );
+
+}
+
+
+function money(value){
+
+  return "৳ " +
+    Number(value || 0).toLocaleString(
+      "en-BD",
+      {
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+      }
+    );
+
+}
+
+
+function today(){
+
+  return new Date()
+    .toISOString()
+    .split("T")[0];
+
+}
+
+
+function showToast(message){
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.textContent = message;
+
+  toast.classList.add("show");
+
+  setTimeout(
+    () => toast.classList.remove("show"),
+    2500
+  );
+
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+function login(){
+
+  const username =
+    document.getElementById("loginUsername").value.trim();
+
+  const password =
+    document.getElementById("loginPassword").value;
+
+  /*
+    Demo login
+
+    Username: admin
+    Password: admin123
+  */
+
+  if(
+    username === "admin" &&
+    password === "admin123"
+  ){
+
+    localStorage.setItem(
+      "saad_logged_in",
+      "1"
+    );
+
+    document.getElementById(
+      "loginScreen"
+    ).style.display="none";
+
+    document.getElementById(
+      "erp"
+    ).style.display="block";
+
+    initializeERP();
+
+  }else{
+
+    document.getElementById(
+      "loginError"
+    ).style.display="block";
+
+  }
+
+}
+
+
+function logout(){
+
+  localStorage.removeItem(
+    "saad_logged_in"
+  );
+
+  location.reload();
+
+}
+
+
+/* =========================================================
+   PAGE NAVIGATION
+========================================================= */
+
+function showPage(page,button){
+
+  document
+    .querySelectorAll(".page")
+    .forEach(
+      p => p.classList.remove("active")
+    );
+
+  const target =
+    document.getElementById(
+      "page-" + page
+    );
+
+  if(target){
+    target.classList.add("active");
+  }
+
+
+  document
+    .querySelectorAll(".nav-btn")
+    .forEach(
+      b => b.classList.remove("active")
+    );
+
+  if(button){
+    button.classList.add("active");
+  }
+
+
+  const titles = {
+
+    dashboard:"Dashboard",
+    products:"Product Master",
+    customers:"Customer Master",
+    suppliers:"Supplier Master",
+    purchase:"Purchase / Stock In",
+    pos:"Sales / POS",
+    quotation:"Quotation",
+    invoice:"Invoice",
+    challan:"Delivery Challan",
+    reports:"Reports"
+
+  };
+
+  document.getElementById(
+    "topbarTitle"
+  ).textContent =
+    titles[page] || "Dashboard";
+
+
+  if(page === "products"){
+    renderProducts();
+  }
+
+  if(page === "customers"){
+    renderCustomers();
+  }
+
+  if(page === "suppliers"){
+    renderSuppliers();
+  }
+
+  if(page === "purchase"){
+    initializePurchase();
+  }
+
+  if(page === "pos"){
+    initializePOS();
+  }
+
+  if(page === "reports"){
+    renderReports();
+  }
+
+  if(page === "dashboard"){
+    updateDashboard();
+  }
+
+
+  if(
+    window.innerWidth <= 900
+  ){
+
+    document
+      .getElementById("sidebar")
+      .classList.remove("open");
+
+  }
+
+}
+
+
+function toggleSidebar(){
+
+  document
+    .getElementById("sidebar")
+    .classList.toggle("open");
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+function initializeERP(){
+
+  updateDashboard();
+
+  renderProducts();
+
+  renderCustomers();
+
+  renderSuppliers();
+
+  initializePurchase();
+
+  initializePOS();
+
+  initializeDocuments();
+
+}
+
+
+function initializeDocuments(){
+
+  document.getElementById(
+    "quotationNo"
+  ).value =
+    getNextNumber("QT-",sales.length);
+
+  document.getElementById(
+    "quotationDate"
+  ).value = today();
+
+
+  document.getElementById(
+    "invoiceNo"
+  ).value =
+    getNextNumber("INV-",sales.length);
+
+  document.getElementById(
+    "invoiceDate"
+  ).value = today();
+
+
+  document.getElementById(
+    "challanNo"
+  ).value =
+    getNextNumber("DC-",sales.length);
+
+  document.getElementById(
+    "challanDate"
+  ).value = today();
+
+}
+
+
+function getNextNumber(prefix,count){
+
+  return prefix +
+    String(count + 1).padStart(
+      6,
+      "0"
+    );
+
+}
+
+
+/* =========================================================
+   PRODUCT MASTER
+========================================================= */
+
+function openProductModal(){
+
+  document.getElementById(
+    "productCode"
+  ).value =
+    "PRD-" +
+    String(products.length + 1)
+      .padStart(5,"0");
+
+  document.getElementById(
+    "productModal"
+  ).classList.add("show");
+
+}
+
+
+function saveProduct(){
+
+  const product = {
+
+    id:Date.now(),
+
+    code:
+      document.getElementById(
+        "productCode"
+      ).value,
+
+    part:
+      document.getElementById(
+        "productPart"
+      ).value.trim(),
+
+    name:
+      document.getElementById(
+        "productName"
+      ).value.trim(),
+
+    brand:
+      document.getElementById(
+        "productBrand"
+      ).value.trim(),
+
+    category:
+      document.getElementById(
+        "productCategory"
+      ).value,
+
+    unit:
+      document.getElementById(
+        "productUnit"
+      ).value,
+
+    purchase:
+      Number(
+        document.getElementById(
+          "productPurchase"
+        ).value
+      ),
+
+    sale:
+      Number(
+        document.getElementById(
+          "productSale"
+        ).value
+      ),
+
+    stock:
+      Number(
+        document.getElementById(
+          "productStock"
+        ).value
+      ),
+
+    minimum:
+      Number(
+        document.getElementById(
+          "productMinimum"
+        ).value
+      )
+
+  };
+
+
+  if(!product.name){
+
+    alert("Product Name is required.");
+
+    return;
+
+  }
+
+
+  products.push(product);
+
+  saveData();
+
+  closeModal("productModal");
+
+  renderProducts();
+
+  updateDashboard();
+
+  showToast(
+    "Product saved successfully."
+  );
+
+}
+
+
+function renderProducts(){
+
+  const tbody =
+    document.getElementById(
+      "productsTable"
+    );
+
+  if(!tbody) return;
+
+
+  const search =
+    (
+      document.getElementById(
+        "productSearch"
+      )?.value || ""
+    ).toLowerCase();
+
+
+  tbody.innerHTML = "";
+
+
+  products
+    .filter(p =>
+      !search ||
+      p.name.toLowerCase().includes(search) ||
+      p.part.toLowerCase().includes(search) ||
+      p.brand.toLowerCase().includes(search)
+    )
+    .forEach(p => {
+
+      const low =
+        Number(p.stock) <=
+        Number(p.minimum);
+
+
+      const tr =
+        document.createElement("tr");
+
+      tr.innerHTML = `
+
+        <td>${p.code}</td>
+
+        <td>${p.part || "-"}</td>
+
+        <td><strong>${p.name}</strong></td>
+
+        <td>${p.brand || "-"}</td>
+
+        <td>${p.category}</td>
+
+        <td>${p.unit}</td>
+
+        <td>${money(p.purchase)}</td>
+
+        <td>${money(p.sale)}</td>
+
+        <td>${p.stock}</td>
+
+        <td>
+          ${
+            low
+            ?
+            '<span class="badge badge-danger">LOW STOCK</span>'
+            :
+            '<span class="badge badge-success">OK</span>'
+          }
+        </td>
+
+        <td>
+
+          <button
+            class="btn btn-danger"
+            style="padding:6px 9px;font-size:11px;"
+            onclick="deleteProduct(${p.id})"
+          >
+            Delete
+          </button>
+
+        </td>
+
+      `;
+
+      tbody.appendChild(tr);
+
+    });
+
+}
+
+
+function deleteProduct(id){
+
+  if(
+    !confirm(
+      "Delete this product?"
+    )
+  ) return;
+
+  products =
+    products.filter(
+      p => p.id !== id
+    );
+
+  saveData();
+
+  renderProducts();
+
+  updateDashboard();
+
+}
+
+
+/* =========================================================
+   CUSTOMER MASTER
+========================================================= */
+
+function openCustomerModal(){
+
+  document.getElementById(
+    "customerModal"
+  ).classList.add("show");
+
+}
+
+
+function saveCustomer(){
+
+  const name =
+    document.getElementById(
+      "customerName"
+    ).value.trim();
+
+
+  if(!name){
+
+    alert(
+      "Customer name is required."
+    );
+
+    return;
+
+  }
+
+
+  customers.push({
+
+    id:Date.now(),
+
+    name,
+
+    phone:
+      document.getElementById(
+        "customerPhone"
+      ).value.trim(),
+
+    email:
+      document.getElementById(
+        "customerEmail"
+      ).value.trim(),
+
+    address:
+      document.getElementById(
+        "customerAddress"
+      ).value.trim()
+
+  });
+
+
+  saveData();
+
+  closeModal("customerModal");
+
+  renderCustomers();
+
+  updateCustomerSelects();
+
+  updateDashboard();
+
+  showToast(
+    "Customer saved successfully."
+  );
+
+}
+
+
+function renderCustomers(){
+
+  const tbody =
+    document.getElementById(
+      "customersTable"
+    );
+
+  if(!tbody) return;
+
+  tbody.innerHTML = "";
+
+
+  customers.forEach(c => {
+
+    const tr =
+      document.createElement("tr");
+
+    tr.innerHTML = `
+
+      <td>${c.id}</td>
+
+      <td><strong>${c.name}</strong></td>
+
+      <td>${c.phone || "-"}</td>
+
+      <td>${c.email || "-"}</td>
+
+      <td>${c.address || "-"}</td>
+
+      <td>
+
+        <button
+          class="btn btn-danger"
+          style="padding:6px 9px;font-size:11px;"
+          onclick="deleteCustomer(${c.id})"
+        >
+          Delete
+        </button>
+
+      </td>
+
+    `;
+
+    tbody.appendChild(tr);
+
+  });
+
+}
+
+
+function deleteCustomer(id){
+
+  if(
+    !confirm(
+      "Delete this customer?"
+    )
+  ) return;
+
+  customers =
+    customers.filter(
+      c => c.id !== id
+    );
+
+  saveData();
+
+  renderCustomers();
+
+  updateCustomerSelects();
+
+  updateDashboard();
+
+}
+
+
+/* =========================================================
+   SUPPLIERS
+========================================================= */
+
+function openSupplierModal(){
+
+  document.getElementById(
+    "supplierModal"
+  ).classList.add("show");
+
+}
+
+
+function saveSupplier(){
+
+  const name =
+    document.getElementById(
+      "supplierName"
+    ).value.trim();
+
+
+  if(!name){
+
+    alert(
+      "Supplier name is required."
+    );
+
+    return;
+
+  }
+
+
+  suppliers.push({
+
+    id:Date.now(),
+
+    name,
+
+    phone:
+      document.getElementById(
+        "supplierPhone"
+      ).value.trim(),
+
+    email:
+      document.getElementById(
+        "supplierEmail"
+      ).value.trim(),
+
+    address:
+      document.getElementById(
+        "supplierAddress"
+      ).value.trim()
+
+  });
+
+
+  saveData();
+
+  closeModal("supplierModal");
+
+  renderSuppliers();
+
+  updateSupplierSelect();
+
+  showToast(
+    "Supplier saved successfully."
+  );
+
+}
+
+
+function renderSuppliers(){
+
+  const tbody =
+    document.getElementById(
+      "suppliersTable"
+    );
+
+  if(!tbody) return;
+
+  tbody.innerHTML = "";
+
+
+  suppliers.forEach(s => {
+
+    const tr =
+      document.createElement("tr");
+
+    tr.innerHTML = `
+
+      <td>${s.id}</td>
+
+      <td><strong>${s.name}</strong></td>
+
+      <td>${s.phone || "-"}</td>
+
+      <td>${s.email || "-"}</td>
+
+      <td>${s.address || "-"}</td>
+
+      <td>
+
+        <button
+          class="btn btn-danger"
+          style="padding:6px 9px;font-size:11px;"
+          onclick="deleteSupplier(${s.id})"
+        >
+          Delete
+        </button>
+
+      </td>
+
+    `;
+
+    tbody.appendChild(tr);
+
+  });
+
+}
+
+
+function deleteSupplier(id){
+
+  if(
+    !confirm(
+      "Delete this supplier?"
+    )
+  ) return;
+
+  suppliers =
+    suppliers.filter(
+      s => s.id !== id
+    );
+
+  saveData();
+
+  renderSuppliers();
+
+  updateSupplierSelect();
+
+}
+
+
+/* =========================================================
+   SELECTS
+========================================================= */
+
+function updateCustomerSelects(){
+
+  const select =
+    document.getElementById(
+      "posCustomer"
+    );
+
+  if(!select) return;
+
+
+  select.innerHTML =
+    '<option value="">Walk-in Customer</option>';
+
+
+  customers.forEach(c => {
+
+    select.innerHTML += `
+
+      <option value="${c.id}">
+        ${c.name}
+      </option>
+
+    `;
+
+  });
+
+}
+
+
+function updateSupplierSelect(){
+
+  const select =
+    document.getElementById(
+      "purchaseSupplier"
+    );
+
+  if(!select) return;
+
+
+  select.innerHTML =
+    '<option value="">Select Supplier</option>';
+
+
+  suppliers.forEach(s => {
+
+    select.innerHTML += `
+
+      <option value="${s.id}">
+        ${s.name}
+      </option>
+
+    `;
+
+  });
+
+}
+
+
+/* =========================================================
+   PURCHASE
+========================================================= */
+
+function initializePurchase(){
+
+  document.getElementById(
+    "purchaseNo"
+  ).value =
+    getNextNumber(
+      "PUR-",
+      purchases.length
+    );
+
+  document.getElementById(
+    "purchaseDate"
+  ).value = today();
+
+  updateSupplierSelect();
+
+}
+
+
+function addPurchaseRow(){
+
+  const tbody =
+    document.getElementById(
+      "purchaseItems"
+    );
+
+
+  const tr =
+    document.createElement("tr");
+
+
+  tr.innerHTML = `
+
+    <td>
+
+      <select
+        class="purchase-product"
+        onchange="purchaseProductChanged(this)"
+      >
+
+        <option value="">
+          Select Product
+        </option>
+
+        ${
+          products.map(
+            p =>
+            `<option value="${p.id}">
+              ${p.name}
+            </option>`
+          ).join("")
+        }
+
+      </select>
+
+    </td>
+
+    <td class="purchase-part">-</td>
+
+    <td class="purchase-unit">PCS</td>
+
+    <td>
+
+      <input
+        class="purchase-qty"
+        type="number"
+        min="1"
+        value="1"
+        oninput="calculatePurchaseTotal()"
+      >
+
+    </td>
+
+    <td>
+
+      <input
+        class="purchase-price"
+        type="number"
+        min="0"
+        value="0"
+        oninput="calculatePurchaseTotal()"
+      >
+
+    </td>
+
+    <td class="purchase-line-total">
+      ৳ 0
+    </td>
+
+    <td>
+
+      <button
+        class="btn btn-danger"
+        style="padding:5px 8px;"
+        onclick="this.closest('tr').remove();calculatePurchaseTotal();"
+      >
+        ✕
+      </button>
+
+    </td>
+
+  `;
+
+
+  tbody.appendChild(tr);
+
+}
+
+
+function purchaseProductChanged(select){
+
+  const product =
+    products.find(
+      p => p.id == select.value
+    );
+
+
+  const row =
+    select.closest("tr");
+
+
+  if(!product) return;
+
+
+  row.querySelector(
+    ".purchase-part"
+  ).textContent =
+    product.part || "-";
+
+
+  row.querySelector(
+    ".purchase-unit"
+  ).textContent =
+    product.unit;
+
+
+  row.querySelector(
+    ".purchase-price"
+  ).value =
+    product.purchase;
+
+
+  calculatePurchaseTotal();
+
+}
+
+
+function calculatePurchaseTotal(){
+
+  let total = 0;
+
+
+  document
+    .querySelectorAll(
+      "#purchaseItems tr"
+    )
+    .forEach(row => {
+
+      const qty =
+        Number(
+          row.querySelector(
+            ".purchase-qty"
+          )?.value || 0
+        );
+
+
+      const price =
+        Number(
+          row.querySelector(
+            ".purchase-price"
+          )?.value || 0
+        );
+
+
+      const line =
+        qty * price;
+
+
+      total += line;
+
+
+      const target =
+        row.querySelector(
+          ".purchase-line-total"
+        );
+
+
+      if(target){
+        target.textContent =
+          money(line);
+      }
+
+    });
+
+
+  document.getElementById(
+    "purchaseTotal"
+  ).textContent =
+    money(total);
+
+}
+
+
+function savePurchase(){
+
+  const rows =
+    [...document.querySelectorAll(
+      "#purchaseItems tr"
+    )];
+
+
+  if(!rows.length){
+
+    alert(
+      "Add at least one item."
+    );
+
+    return;
+
+  }
+
+
+  let total = 0;
+
+  const items = [];
+
+
+  rows.forEach(row => {
+
+    const productId =
+      row.querySelector(
+        ".purchase-product"
+      )?.value;
+
+
+    const qty =
+      Number(
+        row.querySelector(
+          ".purchase-qty"
+        )?.value || 0
+      );
+
+
+    const price =
+      Number(
+        row.querySelector(
+          ".purchase-price"
+        )?.value || 0
+      );
+
+
+    if(productId && qty > 0){
+
+      const product =
+        products.find(
+          p => p.id == productId
+        );
+
+
+      if(product){
+
+        product.stock =
+          Number(product.stock) + qty;
+
+        const line =
+          qty * price;
+
+        total += line;
+
+        items.push({
+
+          productId,
+          qty,
+          price,
+          line
+
+        });
+
+      }
+
+    }
+
+  });
+
+
+  purchases.push({
+
+    id:Date.now(),
+
+    no:
+      document.getElementById(
+        "purchaseNo"
+      ).value,
+
+    date:
+      document.getElementById(
+        "purchaseDate"
+      ).value,
+
+    supplier:
+      document.getElementById(
+        "purchaseSupplier"
+      ).value,
+
+    items,
+
+    total
+
+  });
+
+
+  saveData();
+
+  resetPurchase();
+
+  updateDashboard();
+
+  showToast(
+    "Purchase saved and stock updated."
+  );
+
+}
+
+
+function resetPurchase(){
+
+  document.getElementById(
+    "purchaseItems"
+  ).innerHTML = "";
+
+  initializePurchase();
+
+  document.getElementById(
+    "purchaseTotal"
+  ).textContent =
+    money(0);
+
+}
+
+
+/* =========================================================
+   POS
+========================================================= */
+
+function initializePOS(){
+
+  updateCustomerSelects();
+
+  renderPOSProducts();
+
+  renderCart();
+
+}
+
+
+function renderPOSProducts(){
+
+  const container =
+    document.getElementById(
+      "posProducts"
+    );
+
+  if(!container) return;
+
+
+  const search =
+    (
+      document.getElementById(
+        "posSearch"
+      )?.value || ""
+    ).toLowerCase();
+
+
+  container.innerHTML = "";
+
+
+  products
+    .filter(p =>
+      !search ||
+      p.name.toLowerCase().includes(search) ||
+      p.part.toLowerCase().includes(search)
+    )
+    .forEach(p => {
+
+      const div =
+        document.createElement("div");
+
+      div.className =
+        "pos-product";
+
+
+      div.onclick =
+        () => addToCart(p.id);
+
+
+      div.innerHTML = `
+
+        <strong>
+          ${p.name}
+        </strong>
+
+        <small>
+          ${p.part || "No Part No."}
+        </small>
+
+        <div style="margin-top:8px;">
+          <strong>
+            ${money(p.sale)}
+          </strong>
+        </div>
+
+        <small>
+          Stock: ${p.stock}
+        </small>
+
+      `;
+
+
+      container.appendChild(div);
+
+    });
+
+}
+
+
+function addToCart(productId){
+
+  const product =
+    products.find(
+      p => p.id === productId
+    );
+
+
+  if(!product) return;
+
+
+  if(
+    Number(product.stock) <= 0
+  ){
+
+    alert(
+      "This product is out of stock."
+    );
+
+    return;
+
+  }
+
+
+  const existing =
+    cart.find(
+      x => x.productId === productId
+    );
+
+
+  if(existing){
+
+    if(
+      existing.qty + 1 >
+      Number(product.stock)
+    ){
+
+      alert(
+        "Not enough stock."
+      );
+
+      return;
+
+    }
+
+    existing.qty++;
+
+  }else{
+
+    cart.push({
+
+      productId,
+      qty:1
+
+    });
+
+  }
+
+
+  renderCart();
+
+}
+
+
+function renderCart(){
+
+  const tbody =
+    document.getElementById(
+      "cartTable"
+    );
+
+  if(!tbody) return;
+
+
+  tbody.innerHTML = "";
+
+
+  cart.forEach(item => {
+
+    const product =
+      products.find(
+        p => p.id === item.productId
+      );
+
+
+    if(!product) return;
+
+
+    const total =
+      item.qty * Number(product.sale);
+
+
+    const tr =
+      document.createElement("tr");
+
+
+    tr.innerHTML = `
+
+      <td>
+        ${product.name}
+      </td>
+
+      <td>
+
+        <input
+          type="number"
+          min="1"
+          max="${product.stock}"
+          value="${item.qty}"
+          onchange="changeCartQty(${item.productId},this.value)"
+          style="width:60px;padding:5px;"
+        >
+
+      </td>
+
+      <td>
+        ${money(product.sale)}
+      </td>
+
+      <td>
+        ${money(total)}
+      </td>
+
+      <td>
+
+        <button
+          class="btn btn-danger"
+          style="padding:5px 8px;"
+          onclick="removeFromCart(${item.productId})"
+        >
+          ✕
+        </button>
+
+      </td>
+
+    `;
+
+
+    tbody.appendChild(tr);
+
+  });
+
+
+  updateCartTotal();
+
+}
+
+
+function changeCartQty(productId,qty){
+
+  qty =
+    Number(qty);
+
+
+  const product =
+    products.find(
+      p => p.id === productId
+    );
+
+
+  const item =
+    cart.find(
+      x => x.productId === productId
+    );
+
+
+  if(!product || !item) return;
+
+
+  if(
+    qty < 1 ||
+    qty > Number(product.stock)
+  ){
+
+    alert(
+      "Invalid quantity."
+    );
+
+    renderCart();
+
+    return;
+
+  }
+
+
+  item.qty = qty;
+
+  renderCart();
+
+}
+
+
+function removeFromCart(productId){
+
+  cart =
+    cart.filter(
+      x => x.productId !== productId
+    );
+
+  renderCart();
+
+}
+
+
+function updateCartTotal(){
+
+  let subtotal = 0;
+
+
+  cart.forEach(item => {
+
+    const product =
+      products.find(
+        p => p.id === item.productId
+      );
+
+
+    if(product){
+
+      subtotal +=
+        item.qty *
+        Number(product.sale);
+
+    }
+
+  });
+
+
+  const discount =
+    Number(
+      document.getElementById(
+        "cartDiscount"
+      )?.value || 0
+    );
+
+
+  const total =
+    Math.max(
+      0,
+      subtotal - discount
+    );
+
+
+  document.getElementById(
+    "cartSubtotal"
+  ).textContent =
+    money(subtotal);
+
+
+  document.getElementById(
+    "cartTotal"
+  ).textContent =
+    money(total);
+
+}
+
+
+function completeSale(){
+
+  if(!cart.length){
+
+    alert(
+      "Cart is empty."
+    );
+
+    return;
+
+  }
+
+
+  const customerId =
+    document.getElementById(
+      "posCustomer"
+    ).value;
+
+
+  const discount =
+    Number(
+      document.getElementById(
+        "cartDiscount"
+      ).value || 0
+    );
+
+
+  let subtotal = 0;
+
+  const items = [];
+
+
+  cart.forEach(item => {
+
+    const product =
+      products.find(
+        p => p.id === item.productId
+      );
+
+
+    if(!product) return;
+
+
+    const line =
+      item.qty *
+      Number(product.sale);
+
+
+    subtotal += line;
+
+
+    product.stock =
+      Number(product.stock) -
+      Number(item.qty);
+
+
+    items.push({
+
+      productId:item.productId,
+
+      qty:item.qty,
+
+      price:Number(product.sale),
+
+      line
+
+    });
+
+  });
+
+
+  const total =
+    Math.max(
+      0,
+      subtotal - discount
+    );
+
+
+  const sale = {
+
+    id:Date.now(),
+
+    invoice:
+      getNextNumber(
+        "INV-",
+        sales.length
+      ),
+
+    date:today(),
+
+    customerId,
+
+    items,
+
+    subtotal,
+
+    discount,
+
+    total
+
+  };
+
+
+  sales.push(sale);
+
+  saveData();
+
+
+  alert(
+    "Sale completed successfully.\n\n" +
+    sale.invoice +
+    "\n" +
+    money(total)
+  );
+
+
+  cart = [];
+
+  document.getElementById(
+    "cartDiscount"
+  ).value = 0;
+
+  renderCart();
+
+  renderPOSProducts();
+
+  updateDashboard();
+
+}
+
+
+/* =========================================================
+   QUOTATION
+========================================================= */
+
+function addQuotationRow(){
+
+  const tbody =
+    document.getElementById(
+      "quotationItems"
+    );
+
+
+  const rowCount =
+    tbody.children.length + 1;
+
+
+  const tr =
+    document.createElement("tr");
+
+
+  tr.innerHTML = `
+
+    <td>
+      ${rowCount}
+    </td>
+
+    <td>
+      <input
+        class="q-desc"
+        placeholder="Description"
+      >
+    </td>
+
+    <td>
+      <input
+        class="q-part"
+        placeholder="Part No."
+      >
+    </td>
+
+    <td>
+      <input
+        class="q-qty"
+        type="number"
+        value="1"
+        min="1"
+        oninput="calculateQuotation()"
+      >
+    </td>
+
+    <td>
+      <input
+        class="q-price"
+        type="number"
+        value="0"
+        min="0"
+        oninput="calculateQuotation()"
+      >
+    </td>
+
+    <td class="q-total">
+      ৳ 0
+    </td>
+
+  `;
+
+
+  tbody.appendChild(tr);
+
+}
+
+
+function calculateQuotation(){
+
+  let total = 0;
+
+
+  document
+    .querySelectorAll(
+      "#quotationItems tr"
+    )
+    .forEach(row => {
+
+      const qty =
+        Number(
+          row.querySelector(
+            ".q-qty"
+          )?.value || 0
+        );
+
+
+      const price =
+        Number(
+          row.querySelector(
+            ".q-price"
+          )?.value || 0
+        );
+
+
+      const line =
+        qty * price;
+
+
+      total += line;
+
+
+      row.querySelector(
+        ".q-total"
+      ).textContent =
+        money(line);
+
+    });
+
+
+  document.getElementById(
+    "quotationTotal"
+  ).textContent =
+    money(total);
+
+}
+
+
+function printQuotation(){
+
+  calculateQuotation();
+
+  window.print();
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function updateDashboard(){
+
+  const totalSales =
+    sales.reduce(
+      (sum,s) =>
+        sum + Number(s.total || 0),
+      0
+    );
+
+
+  const totalPurchase =
+    purchases.reduce(
+      (sum,p) =>
+        sum + Number(p.total || 0),
+      0
+    );
+
+
+  const stockValue =
+    products.reduce(
+      (sum,p) =>
+        sum +
+        Number(p.stock || 0) *
+        Number(p.purchase || 0),
+      0
+    );
+
+
+  const todaySales =
+    sales
+      .filter(
+        s => s.date === today()
+      )
+      .reduce(
+        (sum,s) =>
+          sum + Number(s.total || 0),
+        0
+      );
+
+
+  const lowStock =
+    products.filter(
+      p =>
+        Number(p.stock) <=
+        Number(p.minimum)
+    );
+
+
+  document.getElementById(
+    "todaySales"
+  ).textContent =
+    money(todaySales);
+
+
+  document.getElementById(
+    "totalSales"
+  ).textContent =
+    money(totalSales);
+
+
+  document.getElementById(
+    "totalPurchase"
+  ).textContent =
+    money(totalPurchase);
+
+
+  document.getElementById(
+    "stockValue"
+  ).textContent =
+    money(stockValue);
+
+
+  document.getElementById(
+    "productCount"
+  ).textContent =
+    products.length;
+
+
+  document.getElementById(
+    "customerCount"
+  ).textContent =
+    customers.length;
+
+
+  document.getElementById(
+    "lowStockCount"
+  ).textContent =
+    lowStock.length;
+
+
+  const lowTable =
+    document.getElementById(
+      "lowStockTable"
+    );
+
+
+  lowTable.innerHTML = "";
+
+
+  lowStock
+    .slice(0,8)
+    .forEach(p => {
+
+      const tr =
+        document.createElement("tr");
+
+
+      tr.innerHTML = `
+
+        <td>${p.part || "-"}</td>
+
+        <td>${p.name}</td>
+
+        <td>
+          <span class="badge badge-danger">
+            ${p.stock}
+          </span>
+        </td>
+
+        <td>${p.minimum}</td>
+
+      `;
+
+
+      lowTable.appendChild(tr);
+
+    });
+
+
+  const recent =
+    document.getElementById(
+      "recentSalesTable"
+    );
+
+
+  recent.innerHTML = "";
+
+
+  sales
+    .slice(-8)
+    .reverse()
+    .forEach(s => {
+
+      const customer =
+        customers.find(
+          c => c.id == s.customerId
+        );
+
+
+      const tr =
+        document.createElement("tr");
+
+
+      tr.innerHTML = `
+
+        <td>${s.invoice}</td>
+
+        <td>
+          ${customer?.name || "Walk-in"}
+        </td>
+
+        <td>
+          ${money(s.total)}
+        </td>
+
+      `;
+
+
+      recent.appendChild(tr);
+
+    });
+
+}
+
+
+/* =========================================================
+   REPORTS
+========================================================= */
+
+function renderReports(){
+
+  const totalSales =
+    sales.reduce(
+      (sum,s) =>
+        sum + Number(s.total || 0),
+      0
+    );
+
+
+  const totalPurchase =
+    purchases.reduce(
+      (sum,p) =>
+        sum + Number(p.total || 0),
+      0
+    );
+
+
+  const stockValue =
+    products.reduce(
+      (sum,p) =>
+        sum +
+        Number(p.stock || 0) *
+        Number(p.purchase || 0),
+      0
+    );
+
+
+  document.getElementById(
+    "reportSales"
+  ).textContent =
+    money(totalSales);
+
+
+  document.getElementById(
+    "reportPurchase"
+  ).textContent =
+    money(totalPurchase);
+
+
+  document.getElementById(
+    "reportStock"
+  ).textContent =
+    money(stockValue);
+
+
+  const tbody =
+    document.getElementById(
+      "stockReportTable"
+    );
+
+
+  tbody.innerHTML = "";
+
+
+  products.forEach(p => {
+
+    const value =
+      Number(p.stock) *
+      Number(p.purchase);
+
+
+    const tr =
+      document.createElement("tr");
+
+
+    tr.innerHTML = `
+
+      <td>${p.code}</td>
+
+      <td>${p.part || "-"}</td>
+
+      <td>${p.name}</td>
+
+      <td>${p.brand || "-"}</td>
+
+      <td>${money(p.purchase)}</td>
+
+      <td>${money(p.sale)}</td>
+
+      <td>${p.stock}</td>
+
+      <td>${money(value)}</td>
+
+    `;
+
+
+    tbody.appendChild(tr);
+
+  });
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function closeModal(id){
+
+  document
+    .getElementById(id)
+    .classList.remove("show");
+
+}
+
+
+/* =========================================================
+   AUTO INIT
+========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    if(
+      localStorage.getItem(
+        "saad_logged_in"
+      ) === "1"
+    ){
+
+      document.getElementById(
+        "loginScreen"
+      ).style.display="none";
+
+      document.getElementById(
+        "erp"
+      ).style.display="block";
+
+      initializeERP();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   KEYBOARD
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  function(e){
+
+    if(
+      e.key === "Escape"
+    ){
+
+      document
+        .querySelectorAll(".modal.show")
+        .forEach(
+          m =>
+            m.classList.remove("show")
+        );
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+</html>
