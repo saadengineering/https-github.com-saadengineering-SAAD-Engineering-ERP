@@ -1,1 +1,202 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>SAAD Engineering - Admin Panel</title> <style> *{box-sizing:border-box;margin:0;padding:0} body{ font-family:Arial,Helvetica,sans-serif; background:#f4f7fb; color:#172033; min-height:100vh; } button,input,textarea,select{ font:inherit; } .login-page{ min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px; background:linear-gradient(135deg,#07111f,#12345b); } .login-box{ width:100%; max-width:420px; background:#fff; border-radius:18px; padding:35px; box-shadow:0 20px 60px rgba(0,0,0,.25); } .logo{ text-align:center; margin-bottom:25px; } .logo-icon{ width:65px; height:65px; margin:auto; display:flex; align-items:center; justify-content:center; border-radius:16px; background:#0b5cff; color:#fff; font-size:30px; font-weight:bold; } .logo h1{ margin-top:12px; font-size:25px; } .logo p{ margin-top:5px; color:#6b7280; font-size:14px; } .form-group{ margin-bottom:17px; } .form-group label{ display:block; margin-bottom:7px; font-weight:600; font-size:14px; } .form-group input{ width:100%; padding:13px 14px; border:1px solid #d7dce5; border-radius:9px; outline:none; } .form-group input:focus{ border-color:#0b5cff; box-shadow:0 0 0 3px rgba(11,92,255,.1); } .login-btn{ width:100%; border:0; border-radius:9px; padding:14px; background:#0b5cff; color:#fff; font-weight:bold; cursor:pointer; } .login-btn:hover{ background:#084bd1; } .error{ display:none; margin-bottom:15px; padding:11px; border-radius:8px; background:#fee2e2; color:#b91c1c; font-size:14px; } .admin-page{ display:none; min-height:100vh; } .topbar{ background:#07111f; color:#fff; padding:15px 22px; display:flex; align-items:center; justify-content:space-between; gap:15px; } .brand{ font-size:20px; font-weight:bold; } .logout{ border:1px solid rgba(255,255,255,.3); background:transparent; color:#fff; padding:9px 15px; border-radius:7px; cursor:pointer; } .container{ width:min(1100px,94%); margin:25px auto; } .welcome{ margin-bottom:22px; } .welcome h2{ margin-bottom:5px; } .welcome p{ color:#6b7280; } .cards{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:18px; margin-bottom:25px; } .card{ background:#fff; border-radius:14px; padding:22px; box-shadow:0 5px 20px rgba(0,0,0,.06); } .card-icon{ font-size:28px; margin-bottom:10px; } .card h3{ font-size:17px; margin-bottom:6px; } .card p{ color:#6b7280; font-size:14px; } .panel{ background:#fff; border-radius:14px; padding:25px; margin-bottom:22px; box-shadow:0 5px 20px rgba(0,0,0,.06); } .panel h3{ margin-bottom:8px; } .panel-description{ color:#6b7280; margin-bottom:20px; font-size:14px; } .form-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; } .full{ grid-column:1/-1; } input[type="text"], input[type="url"], textarea, select{ width:100%; padding:12px; border:1px solid #d7dce5; border-radius:8px; outline:none; } textarea{ min-height:120px; resize:vertical; } .save-btn{ margin-top:16px; padding:12px 20px; border:0; border-radius:8px; background:#0b5cff; color:#fff; font-weight:bold; cursor:pointer; } .reset-btn{ margin-top:16px; margin-left:8px; padding:12px 20px; border:1px solid #d7dce5; border-radius:8px; background:#fff; cursor:pointer; } .notice{ padding:14px; border-radius:9px; background:#fff7ed; color:#9a3412; font-size:14px; line-height:1.6; } .status{ display:none; margin-top:15px; padding:11px; border-radius:8px; background:#dcfce7; color:#166534; } @media(max-width:650px){ .form-grid{ grid-template-columns:1fr; } .full{ grid-column:auto; } .login-box{ padding:25px; } } </style> </head> <body> <!-- LOGIN --> <section class="login-page" id="loginPage"> <div class="login-box"> <div class="logo"> <div class="logo-icon">SE</div> <h1>SAAD Engineering ERP</h1> <p>Professional ERP & POS Management System</p> </div> <div class="error" id="loginError"> Invalid username or password. </div> <div class="form-group"> <label for="username">Username</label> <input type="text" id="username" autocomplete="username" placeholder="Enter username"> </div> <div class="form-group"> <label for="password">Password</label> <input type="password" id="password" autocomplete="current-password" placeholder="Enter password"> </div> <button class="login-btn" onclick="login()"> Login to ERP </button> </div> </section> <!-- ADMIN PANEL --> <section class="admin-page" id="adminPage"> <header class="topbar"> <div class="brand"> ⚡ SAAD ENGINEERING — ADMIN </div> <button class="logout" onclick="logout()"> Logout </button> </header> <main class="container"> <div class="welcome"> <h2>Admin Panel</h2> <p> Manage your SAAD Engineering website content. </p> </div> <div class="cards"> <div class="card"> <div class="card-icon">📦</div> <h3>Products</h3> <p>Manage product information.</p> </div> <div class="card"> <div class="card-icon">🖼️</div> <h3>Gallery</h3> <p>Manage website images.</p> </div> <div class="card"> <div class="card-icon">⚙️</div> <h3>Services</h3> <p>Manage service information.</p> </div> <div class="card"> <div class="card-icon">📋</div> <h3>Website Content</h3> <p>Manage basic website information.</p> </div> </div> <div class="panel"> <h3>Website Information</h3> <p class="panel-description"> Edit the basic information used by your SAAD Engineering website. </p> <div class="form-grid"> <div class="form-group"> <label>Company Name</label> <input type="text" id="companyName" value="SAAD ENGINEERING"> </div> <div class="form-group"> <label>Tagline</label> <input type="text" id="tagline" value="Powering Progress with Precision"> </div> <div class="form-group"> <label>Phone 1</label> <input type="text" id="phone1" value="+880 1719 874 630"> </div> <div class="form-group"> <label>Phone 2</label> <input type="text" id="phone2" value="+880 1628 915 220"> </div> <div class="form-group"> <label>Email</label> <input type="text" id="email" value="saad.engineeringhw@gmail.com"> </div> <div class="form-group"> <label>Location</label> <input type="text" id="location" value="Gazipur, Bangladesh"> </div> <div class="form-group full"> <label>About Company</label> <textarea id="aboutText">Saad Engineering is a privately owned Bangladeshi company specializing in power, automation, and industrial engineering solutions.</textarea> </div> </div> <button class="save-btn" onclick="saveSettings()"> 💾 Save Changes </button> <button class="reset-btn" onclick="loadSettings()"> Reset </button> <div class="status" id="saveStatus"> ✓ Changes saved on this device. </div> </div> <div class="panel"> <h3>Website Management</h3> <p class="panel-description"> Your existing website remains unchanged. These controls are prepared for connecting the Admin Panel with your existing database/API. </p> <div class="notice"> <strong>Important:</strong> This page currently stores the edited information locally in this browser. The public website will only update automatically after the existing database/API connection is connected to these controls. </div> </div> <div class="panel"> <h3>Quick Links</h3> <p class="panel-description"> Open the public SAAD Engineering website. </p> <button class="save-btn" onclick="window.open('https://saadengineering.pages.dev/','_blank')"> 🌐 Open Public Website </button> </div> </main> </section> <script> /* Temporary Admin Login -------------------------------- Username: admin Password: SAAD@2026 IMPORTANT: This is only a client-side login. It is NOT suitable for protecting confidential production data. A real secure login should use Cloudflare Access / Worker authentication. */ const ADMIN_USERNAME = "admin"; const ADMIN_PASSWORD = "SAAD@2026"; function login(){ const username = document.getElementById("username").value.trim(); const password = document.getElementById("password").value; const error = document.getElementById("loginError"); if( username === ADMIN_USERNAME && password === ADMIN_PASSWORD ){ error.style.display = "none"; sessionStorage.setItem( "saad_admin_logged_in", "true" ); showAdmin(); }else{ error.style.display = "block"; } } function showAdmin(){ document.getElementById("loginPage").style.display = "none"; document.getElementById("adminPage").style.display = "block"; loadSettings(); } function logout(){ sessionStorage.removeItem( "saad_admin_logged_in" ); document.getElementById("adminPage").style.display = "none"; document.getElementById("loginPage").style.display = "flex"; document.getElementById("username").value = ""; document.getElementById("password").value = ""; } function saveSettings(){ const settings = { companyName: document.getElementById("companyName").value, tagline: document.getElementById("tagline").value, phone1: document.getElementById("phone1").value, phone2: document.getElementById("phone2").value, email: document.getElementById("email").value, location: document.getElementById("location").value, aboutText: document.getElementById("aboutText").value }; localStorage.setItem( "saad_engineering_settings", JSON.stringify(settings) ); const status = document.getElementById("saveStatus"); status.style.display = "block"; setTimeout(function(){ status.style.display = "none"; },3000); } function loadSettings(){ const saved = localStorage.getItem( "saad_engineering_settings" ); if(!saved) return; try{ const settings = JSON.parse(saved); document.getElementById("companyName").value = settings.companyName || ""; document.getElementById("tagline").value = settings.tagline || ""; document.getElementById("phone1").value = settings.phone1 || ""; document.getElementById("phone2").value = settings.phone2 || ""; document.getElementById("email").value = settings.email || ""; document.getElementById("location").value = settings.location || ""; document.getElementById("aboutText").value = settings.aboutText || ""; }catch(error){ console.error( "Unable to load saved settings:", error ); } } document.addEventListener( "keydown", function(event){ if(event.key === "Enter"){ const loginPage = document.getElementById("loginPage"); if( loginPage.style.display !== "none" ){ login(); } } } ); window.addEventListener( "DOMContentLoaded", function(){ if( sessionStorage.getItem( "saad_admin_logged_in" ) === "true" ){ showAdmin(); } } ); </script> </body> </html>
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SAAD Engineering - Admin Panel</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#172033;min-height:100vh}
+button,input,textarea{font:inherit}
+.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#07111f,#12345b)}
+.login-box{width:100%;max-width:420px;background:#fff;border-radius:18px;padding:35px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.logo{text-align:center;margin-bottom:25px}.logo-icon{width:65px;height:65px;margin:auto;display:flex;align-items:center;justify-content:center;border-radius:16px;background:#0b5cff;color:#fff;font-size:30px;font-weight:bold}.logo h1{margin-top:12px;font-size:25px}.logo p{margin-top:5px;color:#6b7280;font-size:14px}
+.form-group{margin-bottom:17px}.form-group label{display:block;margin-bottom:7px;font-weight:600;font-size:14px}
+input,textarea{width:100%;padding:12px 14px;border:1px solid #d7dce5;border-radius:9px;outline:none}textarea{min-height:110px;resize:vertical}input:focus,textarea:focus{border-color:#0b5cff;box-shadow:0 0 0 3px rgba(11,92,255,.1)}
+.login-btn,.save-btn{width:100%;border:0;border-radius:9px;padding:14px;background:#0b5cff;color:#fff;font-weight:bold;cursor:pointer}.save-btn{width:auto;padding:12px 20px;margin-top:8px}.login-btn:hover,.save-btn:hover{background:#084bd1}
+.error{display:none;margin-bottom:15px;padding:11px;border-radius:8px;background:#fee2e2;color:#b91c1c;font-size:14px}
+.admin-page{display:none;min-height:100vh}.topbar{background:#07111f;color:#fff;padding:15px 22px;display:flex;align-items:center;justify-content:space-between;gap:15px}.brand{font-size:20px;font-weight:bold}.logout{border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;padding:9px 15px;border-radius:7px;cursor:pointer}
+.container{width:min(1100px,94%);margin:25px auto}.welcome{margin-bottom:22px}.welcome h2{margin-bottom:5px}.welcome p{color:#6b7280}
+.panel{background:#fff;border-radius:14px;padding:25px;margin-bottom:22px;box-shadow:0 5px 20px rgba(0,0,0,.06)}.panel h3{margin-bottom:8px}.panel-description{color:#6b7280;margin-bottom:20px;font-size:14px}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.full{grid-column:1/-1}
+.edit-card{border:1px solid #e1e6ef;border-radius:12px;padding:18px;margin-bottom:15px;background:#fafcff}.edit-card h4{margin-bottom:14px;font-size:17px}.card-grid{display:grid;grid-template-columns:110px 1fr 1fr;gap:12px;align-items:end}.icon-input{font-size:24px;text-align:center}.field label{display:block;font-size:12px;font-weight:bold;margin-bottom:6px;color:#4b5563}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.reset-btn{padding:12px 20px;border:1px solid #d7dce5;border-radius:8px;background:#fff;cursor:pointer}
+.notice{padding:14px;border-radius:9px;background:#fff7ed;color:#9a3412;font-size:14px;line-height:1.6}.status{display:none;margin-top:15px;padding:11px;border-radius:8px;background:#dcfce7;color:#166534}
+.quick-preview{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:15px}.preview-card{background:#f7f9fc;border:1px solid #e4e8ef;border-radius:12px;padding:16px}.preview-icon{font-size:28px;margin-bottom:8px}.preview-card h4{margin-bottom:5px}.preview-card p{font-size:13px;color:#6b7280}
+@media(max-width:700px){.form-grid,.card-grid,.quick-preview{grid-template-columns:1fr}.full{grid-column:auto}.login-box{padding:25px}}
+</style>
+</head>
+<body>
+
+<section class="login-page" id="loginPage">
+<div class="login-box">
+<div class="logo"><div class="logo-icon">SE</div><h1>SAAD Engineering ERP</h1><p>Professional ERP & POS Management System</p></div>
+<div class="error" id="loginError">Invalid username or password.</div>
+<div class="form-group"><label>Username</label><input type="text" id="username" autocomplete="username" placeholder="Enter username"></div>
+<div class="form-group"><label>Password</label><input type="password" id="password" autocomplete="current-password" placeholder="Enter password"></div>
+<button class="login-btn" onclick="login()">Login to ERP</button>
+</div>
+</section>
+
+<section class="admin-page" id="adminPage">
+<header class="topbar"><div class="brand">⚡ SAAD ENGINEERING — ADMIN</div><button class="logout" onclick="logout()">Logout</button></header>
+
+<main class="container">
+<div class="welcome"><h2>Admin Panel</h2><p>Edit the four website feature cards below. You can change the icon, name, description and order.</p></div>
+
+<div class="panel">
+<h3>Feature Cards Editor</h3>
+<p class="panel-description">Change the <b>icon, name, description and order</b> of Products, Gallery, Services and Website Content. Save Changes to store the settings on this device.</p>
+
+<div id="cardsEditor"></div>
+
+<div class="actions">
+<button class="save-btn" onclick="saveCards()">💾 Save Changes</button>
+<button class="reset-btn" onclick="resetCards()">Reset to Original</button>
+</div>
+<div class="status" id="saveStatus">✓ Changes saved on this device.</div>
+</div>
+
+<div class="panel">
+<h3>Live Preview</h3>
+<p class="panel-description">This preview shows how your four cards will look after saving.</p>
+<div class="quick-preview" id="preview"></div>
+</div>
+
+<div class="panel">
+<h3>Website Information</h3>
+<p class="panel-description">Your existing company information fields remain available.</p>
+<div class="form-grid">
+<div class="form-group"><label>Company Name</label><input id="companyName" value="SAAD ENGINEERING"></div>
+<div class="form-group"><label>Tagline</label><input id="tagline" value="Powering Progress with Precision"></div>
+<div class="form-group"><label>Phone 1</label><input id="phone1" value="+880 1719 874 630"></div>
+<div class="form-group"><label>Phone 2</label><input id="phone2" value="+880 1628 915 220"></div>
+<div class="form-group"><label>Email</label><input id="email" value="saad.engineeringhw@gmail.com"></div>
+<div class="form-group"><label>Location</label><input id="location" value="Gazipur, Bangladesh"></div>
+<div class="form-group full"><label>About Company</label><textarea id="aboutText">Saad Engineering is a privately owned Bangladeshi company specializing in power, automation, and industrial engineering solutions.</textarea></div>
+</div>
+<button class="save-btn" onclick="saveSettings()">💾 Save Website Information</button>
+</div>
+
+<div class="panel">
+<h3>Important</h3>
+<div class="notice"><b>Note:</b> This version adds the requested editor for the four cards. The saved values are stored in this browser using localStorage. For the public website to change automatically, the public <b>index.html</b> must also be connected to these saved settings (or to a shared database/API).</div>
+</div>
+
+<div class="panel">
+<h3>Quick Links</h3>
+<button class="save-btn" onclick="window.open('https://saadengineering.pages.dev/','_blank')">🌐 Open Public Website</button>
+</div>
+</main>
+</section>
+
+<script>
+const ADMIN_USERNAME="admin";
+const ADMIN_PASSWORD="SAAD@2026";
+
+const DEFAULT_CARDS=[
+{icon:"📦",name:"Products",description:"Manage product information."},
+{icon:"🖼️",name:"Gallery",description:"Manage website images."},
+{icon:"⚙️",name:"Services",description:"Manage service information."},
+{icon:"📋",name:"Website Content",description:"Manage basic website information."}
+];
+
+function login(){
+const u=document.getElementById("username").value.trim();
+const p=document.getElementById("password").value;
+const e=document.getElementById("loginError");
+if(u===ADMIN_USERNAME&&p===ADMIN_PASSWORD){
+e.style.display="none";sessionStorage.setItem("saad_admin_logged_in","true");showAdmin();
+}else e.style.display="block";
+}
+function showAdmin(){
+document.getElementById("loginPage").style.display="none";
+document.getElementById("adminPage").style.display="block";
+renderCards();
+loadSettings();
+}
+function logout(){
+sessionStorage.removeItem("saad_admin_logged_in");
+document.getElementById("adminPage").style.display="none";
+document.getElementById("loginPage").style.display="flex";
+document.getElementById("username").value="";
+document.getElementById("password").value="";
+}
+function getCards(){
+try{
+const x=JSON.parse(localStorage.getItem("saad_engineering_cards"));
+return Array.isArray(x)&&x.length===4?x:DEFAULT_CARDS.map(x=>({...x}));
+}catch(e){return DEFAULT_CARDS.map(x=>({...x}));}
+}
+function renderCards(){
+const cards=getCards(), editor=document.getElementById("cardsEditor");
+editor.innerHTML="";
+cards.forEach((c,i)=>{
+editor.insertAdjacentHTML("beforeend",`
+<div class="edit-card">
+<h4>Card ${i+1}</h4>
+<div class="card-grid">
+<div class="field"><label>ICON</label><input class="icon-input card-icon-input" data-i="${i}" value="${escapeHtml(c.icon)}" maxlength="4"></div>
+<div class="field"><label>NAME</label><input class="card-name-input" data-i="${i}" value="${escapeHtml(c.name)}"></div>
+<div class="field"><label>DESCRIPTION</label><input class="card-desc-input" data-i="${i}" value="${escapeHtml(c.description)}"></div>
+</div>
+</div>`);
+});
+updatePreview();
+}
+function escapeHtml(v){
+return String(v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+function collectCards(){
+return [0,1,2,3].map(i=>({
+icon:document.querySelector('.card-icon-input[data-i="'+i+'"]').value.trim()||"📦",
+name:document.querySelector('.card-name-input[data-i="'+i+'"]').value.trim()||"Card",
+description:document.querySelector('.card-desc-input[data-i="'+i+'"]').value.trim()||""
+}));
+}
+function updatePreview(){
+const cards=collectCardsSafe();
+document.getElementById("preview").innerHTML=cards.map(c=>`<div class="preview-card"><div class="preview-icon">${escapeHtml(c.icon)}</div><h4>${escapeHtml(c.name)}</h4><p>${escapeHtml(c.description)}</p></div>`).join("");
+}
+function collectCardsSafe(){
+const a=document.querySelectorAll(".card-icon-input");
+if(a.length!==4)return getCards();
+return collectCards();
+}
+document.addEventListener("input",function(e){
+if(e.target.classList.contains("card-icon-input")||e.target.classList.contains("card-name-input")||e.target.classList.contains("card-desc-input"))updatePreview();
+});
+function saveCards(){
+localStorage.setItem("saad_engineering_cards",JSON.stringify(collectCards()));
+const s=document.getElementById("saveStatus");s.style.display="block";setTimeout(()=>s.style.display="none",3000);
+}
+function resetCards(){
+localStorage.removeItem("saad_engineering_cards");renderCards();
+}
+function saveSettings(){
+const settings={
+companyName:companyName.value,tagline:tagline.value,phone1:phone1.value,phone2:phone2.value,email:email.value,location:location.value,aboutText:aboutText.value
+};
+localStorage.setItem("saad_engineering_settings",JSON.stringify(settings));
+}
+function loadSettings(){
+try{
+const s=JSON.parse(localStorage.getItem("saad_engineering_settings")||"null");if(!s)return;
+companyName.value=s.companyName||"";tagline.value=s.tagline||"";phone1.value=s.phone1||"";phone2.value=s.phone2||"";email.value=s.email||"";location.value=s.location||"";aboutText.value=s.aboutText||"";
+}catch(e){}
+}
+document.addEventListener("keydown",e=>{
+if(e.key==="Enter"&&document.getElementById("loginPage").style.display!=="none")login();
+});
+window.addEventListener("DOMContentLoaded",()=>{
+if(sessionStorage.getItem("saad_admin_logged_in")==="true")showAdmin();
+});
+</script>
+</body>
+</html>'''
+
+path = Path("/mnt/data/admin.html")
+path.write_text(html, encoding="utf-8")
+print(f"তৈরি হয়েছে: {path} — {len(html):,} characters")
