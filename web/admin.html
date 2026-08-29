@@ -1,202 +1,1666 @@
-from pathlib import Path
-
-html = r'''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>SAAD Engineering - Admin Panel</title>
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#172033;min-height:100vh}
-button,input,textarea{font:inherit}
-.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#07111f,#12345b)}
-.login-box{width:100%;max-width:420px;background:#fff;border-radius:18px;padding:35px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
-.logo{text-align:center;margin-bottom:25px}.logo-icon{width:65px;height:65px;margin:auto;display:flex;align-items:center;justify-content:center;border-radius:16px;background:#0b5cff;color:#fff;font-size:30px;font-weight:bold}.logo h1{margin-top:12px;font-size:25px}.logo p{margin-top:5px;color:#6b7280;font-size:14px}
-.form-group{margin-bottom:17px}.form-group label{display:block;margin-bottom:7px;font-weight:600;font-size:14px}
-input,textarea{width:100%;padding:12px 14px;border:1px solid #d7dce5;border-radius:9px;outline:none}textarea{min-height:110px;resize:vertical}input:focus,textarea:focus{border-color:#0b5cff;box-shadow:0 0 0 3px rgba(11,92,255,.1)}
-.login-btn,.save-btn{width:100%;border:0;border-radius:9px;padding:14px;background:#0b5cff;color:#fff;font-weight:bold;cursor:pointer}.save-btn{width:auto;padding:12px 20px;margin-top:8px}.login-btn:hover,.save-btn:hover{background:#084bd1}
-.error{display:none;margin-bottom:15px;padding:11px;border-radius:8px;background:#fee2e2;color:#b91c1c;font-size:14px}
-.admin-page{display:none;min-height:100vh}.topbar{background:#07111f;color:#fff;padding:15px 22px;display:flex;align-items:center;justify-content:space-between;gap:15px}.brand{font-size:20px;font-weight:bold}.logout{border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;padding:9px 15px;border-radius:7px;cursor:pointer}
-.container{width:min(1100px,94%);margin:25px auto}.welcome{margin-bottom:22px}.welcome h2{margin-bottom:5px}.welcome p{color:#6b7280}
-.panel{background:#fff;border-radius:14px;padding:25px;margin-bottom:22px;box-shadow:0 5px 20px rgba(0,0,0,.06)}.panel h3{margin-bottom:8px}.panel-description{color:#6b7280;margin-bottom:20px;font-size:14px}
-.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.full{grid-column:1/-1}
-.edit-card{border:1px solid #e1e6ef;border-radius:12px;padding:18px;margin-bottom:15px;background:#fafcff}.edit-card h4{margin-bottom:14px;font-size:17px}.card-grid{display:grid;grid-template-columns:110px 1fr 1fr;gap:12px;align-items:end}.icon-input{font-size:24px;text-align:center}.field label{display:block;font-size:12px;font-weight:bold;margin-bottom:6px;color:#4b5563}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.reset-btn{padding:12px 20px;border:1px solid #d7dce5;border-radius:8px;background:#fff;cursor:pointer}
-.notice{padding:14px;border-radius:9px;background:#fff7ed;color:#9a3412;font-size:14px;line-height:1.6}.status{display:none;margin-top:15px;padding:11px;border-radius:8px;background:#dcfce7;color:#166534}
-.quick-preview{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:15px}.preview-card{background:#f7f9fc;border:1px solid #e4e8ef;border-radius:12px;padding:16px}.preview-icon{font-size:28px;margin-bottom:8px}.preview-card h4{margin-bottom:5px}.preview-card p{font-size:13px;color:#6b7280}
-@media(max-width:700px){.form-grid,.card-grid,.quick-preview{grid-template-columns:1fr}.full{grid-column:auto}.login-box{padding:25px}}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+  min-height:100vh
+}
+
+button,input,textarea,select{
+  font:inherit
+}
+
+.login-page{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:linear-gradient(135deg,#07111f,#12345b)
+}
+
+.login-box{
+  width:100%;
+  max-width:430px;
+  background:#fff;
+  border-radius:18px;
+  padding:35px;
+  box-shadow:0 20px 60px rgba(0,0,0,.25)
+}
+
+.logo{
+  text-align:center;
+  margin-bottom:25px
+}
+
+.logo-icon{
+  width:65px;
+  height:65px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:16px;
+  background:#0b5cff;
+  color:#fff;
+  font-size:30px;
+  font-weight:bold
+}
+
+.logo h1{
+  margin-top:12px;
+  font-size:25px
+}
+
+.logo p{
+  margin-top:5px;
+  color:#6b7280;
+  font-size:14px
+}
+
+.form-group{
+  margin-bottom:17px
+}
+
+.form-group label{
+  display:block;
+  margin-bottom:7px;
+  font-weight:600;
+  font-size:14px
+}
+
+input,
+textarea,
+select{
+  width:100%;
+  padding:12px 14px;
+  border:1px solid #d7dce5;
+  border-radius:9px;
+  outline:none;
+  background:#fff
+}
+
+textarea{
+  min-height:110px;
+  resize:vertical
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:#0b5cff;
+  box-shadow:0 0 0 3px rgba(11,92,255,.1)
+}
+
+.login-btn,
+.save-btn,
+.primary-btn{
+  border:0;
+  border-radius:9px;
+  padding:13px 20px;
+  background:#0b5cff;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer
+}
+
+.login-btn{
+  width:100%;
+  padding:14px
+}
+
+.login-btn:hover,
+.save-btn:hover,
+.primary-btn:hover{
+  background:#084bd1
+}
+
+.error{
+  display:none;
+  margin-bottom:15px;
+  padding:11px;
+  border-radius:8px;
+  background:#fee2e2;
+  color:#b91c1c;
+  font-size:14px
+}
+
+.admin-page{
+  display:none;
+  min-height:100vh
+}
+
+.topbar{
+  background:#07111f;
+  color:#fff;
+  padding:15px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px
+}
+
+.brand{
+  font-size:20px;
+  font-weight:bold
+}
+
+.logout{
+  border:1px solid rgba(255,255,255,.3);
+  background:transparent;
+  color:#fff;
+  padding:9px 15px;
+  border-radius:7px;
+  cursor:pointer
+}
+
+.container{
+  width:min(1150px,94%);
+  margin:25px auto
+}
+
+.welcome{
+  margin-bottom:22px
+}
+
+.welcome h2{
+  margin-bottom:5px
+}
+
+.welcome p{
+  color:#6b7280
+}
+
+.panel{
+  background:#fff;
+  border-radius:14px;
+  padding:25px;
+  margin-bottom:22px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06)
+}
+
+.panel h3{
+  margin-bottom:8px
+}
+
+.panel-description{
+  color:#6b7280;
+  margin-bottom:20px;
+  font-size:14px
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px
+}
+
+.full{
+  grid-column:1/-1
+}
+
+.card{
+  border:1px solid #e1e6ef;
+  border-radius:12px;
+  padding:18px;
+  margin-bottom:15px;
+  background:#fafcff
+}
+
+.card-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:15px
+}
+
+.card-header h4{
+  font-size:17px
+}
+
+.badge{
+  padding:5px 9px;
+  border-radius:20px;
+  background:#e8f0ff;
+  color:#0b5cff;
+  font-size:12px;
+  font-weight:bold
+}
+
+.product-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:18px
+}
+
+.secondary-btn{
+  padding:12px 20px;
+  border:1px solid #d7dce5;
+  border-radius:8px;
+  background:#fff;
+  cursor:pointer
+}
+
+.danger-btn{
+  padding:10px 15px;
+  border:0;
+  border-radius:8px;
+  background:#dc2626;
+  color:#fff;
+  cursor:pointer
+}
+
+.status{
+  display:none;
+  margin-top:15px;
+  padding:12px;
+  border-radius:8px;
+  font-size:14px
+}
+
+.status.success{
+  background:#dcfce7;
+  color:#166534
+}
+
+.status.error-status{
+  background:#fee2e2;
+  color:#991b1b
+}
+
+.notice{
+  padding:14px;
+  border-radius:9px;
+  background:#fff7ed;
+  color:#9a3412;
+  font-size:14px;
+  line-height:1.6
+}
+
+.loading{
+  padding:20px;
+  text-align:center;
+  color:#6b7280
+}
+
+.empty{
+  padding:25px;
+  text-align:center;
+  color:#6b7280;
+  border:1px dashed #d7dce5;
+  border-radius:10px
+}
+
+@media(max-width:700px){
+
+  .form-grid,
+  .product-grid{
+    grid-template-columns:1fr
+  }
+
+  .full{
+    grid-column:auto
+  }
+
+  .login-box{
+    padding:25px
+  }
+
+  .topbar{
+    padding:14px
+  }
+
+  .brand{
+    font-size:16px
+  }
+}
 </style>
 </head>
+
 <body>
 
+<!-- LOGIN -->
 <section class="login-page" id="loginPage">
-<div class="login-box">
-<div class="logo"><div class="logo-icon">SE</div><h1>SAAD Engineering ERP</h1><p>Professional ERP & POS Management System</p></div>
-<div class="error" id="loginError">Invalid username or password.</div>
-<div class="form-group"><label>Username</label><input type="text" id="username" autocomplete="username" placeholder="Enter username"></div>
-<div class="form-group"><label>Password</label><input type="password" id="password" autocomplete="current-password" placeholder="Enter password"></div>
-<button class="login-btn" onclick="login()">Login to ERP</button>
-</div>
+
+  <div class="login-box">
+
+    <div class="logo">
+
+      <div class="logo-icon">
+        SE
+      </div>
+
+      <h1>SAAD Engineering ERP</h1>
+
+      <p>
+        Professional ERP & POS Management System
+      </p>
+
+    </div>
+
+    <div class="error" id="loginError">
+      Invalid username or password.
+    </div>
+
+    <div class="form-group">
+      <label>Username</label>
+
+      <input
+        type="text"
+        id="username"
+        autocomplete="username"
+        placeholder="Enter username">
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+
+      <input
+        type="password"
+        id="password"
+        autocomplete="current-password"
+        placeholder="Enter password">
+    </div>
+
+    <button
+      class="login-btn"
+      onclick="login()">
+
+      Login to ERP
+
+    </button>
+
+  </div>
+
 </section>
 
-<section class="admin-page" id="adminPage">
-<header class="topbar"><div class="brand">⚡ SAAD ENGINEERING — ADMIN</div><button class="logout" onclick="logout()">Logout</button></header>
+
+<!-- ADMIN -->
+<section
+  class="admin-page"
+  id="adminPage">
+
+<header class="topbar">
+
+  <div class="brand">
+    ⚡ SAAD ENGINEERING — ADMIN
+  </div>
+
+  <button
+    class="logout"
+    onclick="logout()">
+
+    Logout
+
+  </button>
+
+</header>
+
 
 <main class="container">
-<div class="welcome"><h2>Admin Panel</h2><p>Edit the four website feature cards below. You can change the icon, name, description and order.</p></div>
 
+<div class="welcome">
+
+  <h2>Admin Dashboard</h2>
+
+  <p>
+    Manage SAAD Engineering website information and products.
+    All saved information is sent to Cloudflare D1 through the API.
+  </p>
+
+</div>
+
+
+<!-- WEBSITE INFORMATION -->
 <div class="panel">
-<h3>Feature Cards Editor</h3>
-<p class="panel-description">Change the <b>icon, name, description and order</b> of Products, Gallery, Services and Website Content. Save Changes to store the settings on this device.</p>
 
-<div id="cardsEditor"></div>
+<h3>🌐 Website Information</h3>
+
+<p class="panel-description">
+Update your company information. Click Save to store the information in D1.
+</p>
+
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Company Name</label>
+
+<input
+id="companyName"
+value="SAAD ENGINEERING">
+</div>
+
+
+<div class="form-group">
+<label>Tagline</label>
+
+<input
+id="tagline"
+value="Powering Progress with Precision">
+</div>
+
+
+<div class="form-group">
+<label>Phone 1</label>
+
+<input
+id="phone1"
+value="+880 1719 874 630">
+</div>
+
+
+<div class="form-group">
+<label>Phone 2</label>
+
+<input
+id="phone2"
+value="+880 1628 915 220">
+</div>
+
+
+<div class="form-group">
+<label>Email</label>
+
+<input
+id="email"
+value="saad.engineeringhw@gmail.com">
+</div>
+
+
+<div class="form-group">
+<label>Location</label>
+
+<input
+id="location"
+value="Gazipur, Bangladesh">
+</div>
+
+
+<div class="form-group full">
+
+<label>Office Address</label>
+
+<textarea id="address">Shop No. 07, 1st Floor, S.M. Kobir Complex, Telipara, Mymensingh Road, Gazipur, Bangladesh</textarea>
+
+</div>
+
+
+<div class="form-group full">
+
+<label>About Company</label>
+
+<textarea id="aboutText">Saad Engineering is a privately owned Bangladeshi company specializing in power, automation, and industrial engineering solutions.</textarea>
+
+</div>
+
+
+<div class="form-group full">
+
+<label>Footer Text</label>
+
+<textarea id="footerText">Power, automation and industrial engineering solutions for Bangladesh.</textarea>
+
+</div>
+
+</div>
+
 
 <div class="actions">
-<button class="save-btn" onclick="saveCards()">💾 Save Changes</button>
-<button class="reset-btn" onclick="resetCards()">Reset to Original</button>
-</div>
-<div class="status" id="saveStatus">✓ Changes saved on this device.</div>
+
+<button
+class="save-btn"
+onclick="saveSettings()">
+
+💾 Save Website Information
+
+</button>
+
 </div>
 
-<div class="panel">
-<h3>Live Preview</h3>
-<p class="panel-description">This preview shows how your four cards will look after saving.</p>
-<div class="quick-preview" id="preview"></div>
+<div
+class="status"
+id="settingsStatus">
 </div>
 
-<div class="panel">
-<h3>Website Information</h3>
-<p class="panel-description">Your existing company information fields remain available.</p>
-<div class="form-grid">
-<div class="form-group"><label>Company Name</label><input id="companyName" value="SAAD ENGINEERING"></div>
-<div class="form-group"><label>Tagline</label><input id="tagline" value="Powering Progress with Precision"></div>
-<div class="form-group"><label>Phone 1</label><input id="phone1" value="+880 1719 874 630"></div>
-<div class="form-group"><label>Phone 2</label><input id="phone2" value="+880 1628 915 220"></div>
-<div class="form-group"><label>Email</label><input id="email" value="saad.engineeringhw@gmail.com"></div>
-<div class="form-group"><label>Location</label><input id="location" value="Gazipur, Bangladesh"></div>
-<div class="form-group full"><label>About Company</label><textarea id="aboutText">Saad Engineering is a privately owned Bangladeshi company specializing in power, automation, and industrial engineering solutions.</textarea></div>
-</div>
-<button class="save-btn" onclick="saveSettings()">💾 Save Website Information</button>
 </div>
 
+
+<!-- PRODUCTS -->
 <div class="panel">
-<h3>Important</h3>
-<div class="notice"><b>Note:</b> This version adds the requested editor for the four cards. The saved values are stored in this browser using localStorage. For the public website to change automatically, the public <b>index.html</b> must also be connected to these saved settings (or to a shared database/API).</div>
+
+<h3>📦 Product Management</h3>
+
+<p class="panel-description">
+Add, edit and delete products. Product information is stored in Cloudflare D1.
+</p>
+
+
+<div class="card">
+
+<h4>Add New Product</h4>
+
+<br>
+
+
+<div class="product-grid">
+
+<div class="form-group">
+
+<label>Product Name *</label>
+
+<input
+id="productName"
+placeholder="Example: Perkins Oil Filter">
+
 </div>
 
-<div class="panel">
-<h3>Quick Links</h3>
-<button class="save-btn" onclick="window.open('https://saadengineering.pages.dev/','_blank')">🌐 Open Public Website</button>
+
+<div class="form-group">
+
+<label>Category</label>
+
+<input
+id="productCategory"
+placeholder="Example: Generator Spare Parts">
+
 </div>
+
+
+<div class="form-group">
+
+<label>Description</label>
+
+<textarea
+id="productDescription"
+placeholder="Product description"></textarea>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Product Image URL</label>
+
+<input
+id="productImage"
+placeholder="https://example.com/image.jpg">
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="primary-btn"
+onclick="addProduct()">
+
+➕ Add Product
+
+</button>
+
+</div>
+
+<div
+class="status"
+id="productStatus">
+</div>
+
+</div>
+
+
+<h4 style="margin:25px 0 12px">
+Existing Products
+</h4>
+
+<div id="productsList">
+
+<div class="loading">
+Loading products...
+</div>
+
+</div>
+
+</div>
+
+
+<!-- API STATUS -->
+<div class="panel">
+
+<h3>🔌 API & D1 Connection</h3>
+
+<p class="panel-description">
+Check whether the Cloudflare Pages Function can communicate with the D1 database.
+</p>
+
+<button
+class="primary-btn"
+onclick="checkAPI()">
+
+🔍 Test D1 Connection
+
+</button>
+
+<div
+class="status"
+id="apiStatus">
+</div>
+
+</div>
+
+
+<!-- IMPORTANT -->
+<div class="panel">
+
+<h3>⚠️ Important</h3>
+
+<div class="notice">
+
+<b>Database Architecture:</b><br><br>
+
+Admin Panel → Cloudflare Pages Functions → D1 Database → Public Website
+
+<br><br>
+
+এই Admin Panel আর browser
+<b>localStorage</b> ব্যবহার করে না।
+Save করলে API-এর মাধ্যমে Cloudflare D1-এ data পাঠানো হবে।
+
+<br><br>
+
+<strong>Security:</strong>
+এই HTML-এর ভিতরে থাকা username/password
+production-grade authentication নয়।
+পরবর্তী ধাপে Cloudflare Access বা server-side authentication
+দিয়ে Admin Panel secure করা উচিত।
+
+</div>
+
+</div>
+
+
+<!-- QUICK LINKS -->
+<div class="panel">
+
+<h3>🔗 Quick Links</h3>
+
+<div class="actions">
+
+<button
+class="primary-btn"
+onclick="window.open('/','_blank')">
+
+🌐 Open Public Website
+
+</button>
+
+
+<button
+class="secondary-btn"
+onclick="window.open('/api/test','_blank')">
+
+🔌 Open API Test
+
+</button>
+
+</div>
+
+</div>
+
 </main>
+
 </section>
 
-<script>
-const ADMIN_USERNAME="admin";
-const ADMIN_PASSWORD="SAAD@2026";
 
-const DEFAULT_CARDS=[
-{icon:"📦",name:"Products",description:"Manage product information."},
-{icon:"🖼️",name:"Gallery",description:"Manage website images."},
-{icon:"⚙️",name:"Services",description:"Manage service information."},
-{icon:"📋",name:"Website Content",description:"Manage basic website information."}
-];
+<script>
+
+/* =========================================================
+   CONFIGURATION
+========================================================= */
+
+const API_BASE = "/api";
+
+const ADMIN_USERNAME = "admin";
+const ADMIN_PASSWORD = "SAAD@2026";
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
 
 function login(){
-const u=document.getElementById("username").value.trim();
-const p=document.getElementById("password").value;
-const e=document.getElementById("loginError");
-if(u===ADMIN_USERNAME&&p===ADMIN_PASSWORD){
-e.style.display="none";sessionStorage.setItem("saad_admin_logged_in","true");showAdmin();
-}else e.style.display="block";
-}
-function showAdmin(){
-document.getElementById("loginPage").style.display="none";
-document.getElementById("adminPage").style.display="block";
-renderCards();
-loadSettings();
-}
-function logout(){
-sessionStorage.removeItem("saad_admin_logged_in");
-document.getElementById("adminPage").style.display="none";
-document.getElementById("loginPage").style.display="flex";
-document.getElementById("username").value="";
-document.getElementById("password").value="";
-}
-function getCards(){
-try{
-const x=JSON.parse(localStorage.getItem("saad_engineering_cards"));
-return Array.isArray(x)&&x.length===4?x:DEFAULT_CARDS.map(x=>({...x}));
-}catch(e){return DEFAULT_CARDS.map(x=>({...x}));}
-}
-function renderCards(){
-const cards=getCards(), editor=document.getElementById("cardsEditor");
-editor.innerHTML="";
-cards.forEach((c,i)=>{
-editor.insertAdjacentHTML("beforeend",`
-<div class="edit-card">
-<h4>Card ${i+1}</h4>
-<div class="card-grid">
-<div class="field"><label>ICON</label><input class="icon-input card-icon-input" data-i="${i}" value="${escapeHtml(c.icon)}" maxlength="4"></div>
-<div class="field"><label>NAME</label><input class="card-name-input" data-i="${i}" value="${escapeHtml(c.name)}"></div>
-<div class="field"><label>DESCRIPTION</label><input class="card-desc-input" data-i="${i}" value="${escapeHtml(c.description)}"></div>
-</div>
-</div>`);
-});
-updatePreview();
-}
-function escapeHtml(v){
-return String(v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-}
-function collectCards(){
-return [0,1,2,3].map(i=>({
-icon:document.querySelector('.card-icon-input[data-i="'+i+'"]').value.trim()||"📦",
-name:document.querySelector('.card-name-input[data-i="'+i+'"]').value.trim()||"Card",
-description:document.querySelector('.card-desc-input[data-i="'+i+'"]').value.trim()||""
-}));
-}
-function updatePreview(){
-const cards=collectCardsSafe();
-document.getElementById("preview").innerHTML=cards.map(c=>`<div class="preview-card"><div class="preview-icon">${escapeHtml(c.icon)}</div><h4>${escapeHtml(c.name)}</h4><p>${escapeHtml(c.description)}</p></div>`).join("");
-}
-function collectCardsSafe(){
-const a=document.querySelectorAll(".card-icon-input");
-if(a.length!==4)return getCards();
-return collectCards();
-}
-document.addEventListener("input",function(e){
-if(e.target.classList.contains("card-icon-input")||e.target.classList.contains("card-name-input")||e.target.classList.contains("card-desc-input"))updatePreview();
-});
-function saveCards(){
-localStorage.setItem("saad_engineering_cards",JSON.stringify(collectCards()));
-const s=document.getElementById("saveStatus");s.style.display="block";setTimeout(()=>s.style.display="none",3000);
-}
-function resetCards(){
-localStorage.removeItem("saad_engineering_cards");renderCards();
-}
-function saveSettings(){
-const settings={
-companyName:companyName.value,tagline:tagline.value,phone1:phone1.value,phone2:phone2.value,email:email.value,location:location.value,aboutText:aboutText.value
-};
-localStorage.setItem("saad_engineering_settings",JSON.stringify(settings));
-}
-function loadSettings(){
-try{
-const s=JSON.parse(localStorage.getItem("saad_engineering_settings")||"null");if(!s)return;
-companyName.value=s.companyName||"";tagline.value=s.tagline||"";phone1.value=s.phone1||"";phone2.value=s.phone2||"";email.value=s.email||"";location.value=s.location||"";aboutText.value=s.aboutText||"";
-}catch(e){}
-}
-document.addEventListener("keydown",e=>{
-if(e.key==="Enter"&&document.getElementById("loginPage").style.display!=="none")login();
-});
-window.addEventListener("DOMContentLoaded",()=>{
-if(sessionStorage.getItem("saad_admin_logged_in")==="true")showAdmin();
-});
-</script>
-</body>
-</html>'''
 
-path = Path("/mnt/data/admin.html")
-path.write_text(html, encoding="utf-8")
-print(f"তৈরি হয়েছে: {path} — {len(html):,} characters")
+  const username =
+    document.getElementById("username").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  const error =
+    document.getElementById("loginError");
+
+
+  if(
+    username === ADMIN_USERNAME &&
+    password === ADMIN_PASSWORD
+  ){
+
+    error.style.display = "none";
+
+    sessionStorage.setItem(
+      "saad_admin_logged_in",
+      "true"
+    );
+
+    showAdmin();
+
+  }else{
+
+    error.style.display = "block";
+
+  }
+
+}
+
+
+function logout(){
+
+  sessionStorage.removeItem(
+    "saad_admin_logged_in"
+  );
+
+  document.getElementById("adminPage")
+    .style.display = "none";
+
+  document.getElementById("loginPage")
+    .style.display = "flex";
+
+  document.getElementById("username")
+    .value = "";
+
+  document.getElementById("password")
+    .value = "";
+
+}
+
+
+function showAdmin(){
+
+  document.getElementById("loginPage")
+    .style.display = "none";
+
+  document.getElementById("adminPage")
+    .style.display = "block";
+
+  loadSettings();
+
+  loadProducts();
+
+}
+
+
+/* =========================================================
+   STATUS MESSAGE
+========================================================= */
+
+function showStatus(
+  elementId,
+  message,
+  success = true
+){
+
+  const element =
+    document.getElementById(elementId);
+
+  element.textContent = message;
+
+  element.style.display = "block";
+
+  element.className =
+    "status " +
+    (success
+      ? "success"
+      : "error-status");
+
+}
+
+
+/* =========================================================
+   API HELPER
+========================================================= */
+
+async function apiRequest(
+  url,
+  options = {}
+){
+
+  const response =
+    await fetch(
+      API_BASE + url,
+      {
+        headers:{
+          "Content-Type":
+            "application/json",
+
+          ...(options.headers || {})
+        },
+
+        ...options
+      }
+    );
+
+
+  let data;
+
+  try{
+
+    data = await response.json();
+
+  }catch(error){
+
+    data = {
+      success:false,
+      message:"Server returned invalid JSON."
+    };
+
+  }
+
+
+  if(!response.ok){
+
+    throw new Error(
+      data.message ||
+      `HTTP ${response.status}`
+    );
+
+  }
+
+
+  return data;
+
+}
+
+
+/* =========================================================
+   WEBSITE SETTINGS
+========================================================= */
+
+async function loadSettings(){
+
+  try{
+
+    const data =
+      await apiRequest("/settings");
+
+    if(
+      data.success &&
+      data.settings
+    ){
+
+      const s =
+        data.settings;
+
+
+      document.getElementById(
+        "companyName"
+      ).value =
+        s.companyName || "";
+
+
+      document.getElementById(
+        "tagline"
+      ).value =
+        s.tagline || "";
+
+
+      document.getElementById(
+        "phone1"
+      ).value =
+        s.phone1 || "";
+
+
+      document.getElementById(
+        "phone2"
+      ).value =
+        s.phone2 || "";
+
+
+      document.getElementById(
+        "email"
+      ).value =
+        s.email || "";
+
+
+      document.getElementById(
+        "location"
+      ).value =
+        s.location || "";
+
+
+      document.getElementById(
+        "address"
+      ).value =
+        s.address || "";
+
+
+      document.getElementById(
+        "aboutText"
+      ).value =
+        s.aboutText || "";
+
+
+      document.getElementById(
+        "footerText"
+      ).value =
+        s.footerText || "";
+
+    }
+
+  }catch(error){
+
+    showStatus(
+      "settingsStatus",
+      "⚠️ Settings API is not available yet: " +
+      error.message,
+      false
+    );
+
+  }
+
+}
+
+
+async function saveSettings(){
+
+  const settings = {
+
+    companyName:
+      document.getElementById(
+        "companyName"
+      ).value.trim(),
+
+    tagline:
+      document.getElementById(
+        "tagline"
+      ).value.trim(),
+
+    phone1:
+      document.getElementById(
+        "phone1"
+      ).value.trim(),
+
+    phone2:
+      document.getElementById(
+        "phone2"
+      ).value.trim(),
+
+    email:
+      document.getElementById(
+        "email"
+      ).value.trim(),
+
+    location:
+      document.getElementById(
+        "location"
+      ).value.trim(),
+
+    address:
+      document.getElementById(
+        "address"
+      ).value.trim(),
+
+    aboutText:
+      document.getElementById(
+        "aboutText"
+      ).value.trim(),
+
+    footerText:
+      document.getElementById(
+        "footerText"
+      ).value.trim()
+
+  };
+
+
+  try{
+
+    const data =
+      await apiRequest(
+        "/settings",
+        {
+          method:"POST",
+          body:JSON.stringify(settings)
+        }
+      );
+
+
+    if(data.success){
+
+      showStatus(
+        "settingsStatus",
+        "✓ Website information saved successfully to D1.",
+        true
+      );
+
+    }else{
+
+      throw new Error(
+        data.message ||
+        "Save failed."
+      );
+
+    }
+
+  }catch(error){
+
+    showStatus(
+      "settingsStatus",
+      "❌ Save failed: " +
+      error.message,
+      false
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   PRODUCTS
+========================================================= */
+
+async function loadProducts(){
+
+  const list =
+    document.getElementById(
+      "productsList"
+    );
+
+  list.innerHTML =
+    '<div class="loading">Loading products...</div>';
+
+
+  try{
+
+    const data =
+      await apiRequest("/products");
+
+
+    const products =
+      data.products ||
+      data.data ||
+      [];
+
+
+    if(!products.length){
+
+      list.innerHTML =
+        '<div class="empty">No products found in D1.</div>';
+
+      return;
+
+    }
+
+
+    list.innerHTML =
+      products.map(
+        product => productHTML(product)
+      ).join("");
+
+
+  }catch(error){
+
+    list.innerHTML =
+      `<div class="empty">
+        ❌ Could not load products.<br>
+        ${escapeHtml(error.message)}
+      </div>`;
+
+  }
+
+}
+
+
+function productHTML(product){
+
+  return `
+
+  <div
+    class="card"
+    data-product-id="${escapeHtml(product.id)}">
+
+    <div class="card-header">
+
+      <h4>
+        ${escapeHtml(
+          product.name || "Unnamed Product"
+        )}
+      </h4>
+
+      <span class="badge">
+        ID: ${escapeHtml(product.id)}
+      </span>
+
+    </div>
+
+
+    <div class="product-grid">
+
+      <div class="form-group">
+
+        <label>Product Name</label>
+
+        <input
+          class="edit-product-name"
+          value="${escapeHtml(
+            product.name || ""
+          )}">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Category</label>
+
+        <input
+          class="edit-product-category"
+          value="${escapeHtml(
+            product.cat || ""
+          )}">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Description</label>
+
+        <textarea
+          class="edit-product-description"
+        >${escapeHtml(
+          product.description || ""
+        )}</textarea>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Image URL</label>
+
+        <input
+          class="edit-product-image"
+          value="${escapeHtml(
+            product.image_url ||
+            product.public_url ||
+            ""
+          )}">
+
+      </div>
+
+    </div>
+
+
+    <div class="actions">
+
+      <button
+        class="primary-btn"
+        onclick="updateProduct(${Number(product.id)})">
+
+        💾 Update
+
+      </button>
+
+
+      <button
+        class="danger-btn"
+        onclick="deleteProduct(${Number(product.id)})">
+
+        🗑️ Delete
+
+      </button>
+
+    </div>
+
+  </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   ADD PRODUCT
+========================================================= */
+
+async function addProduct(){
+
+  const name =
+    document.getElementById(
+      "productName"
+    ).value.trim();
+
+  const cat =
+    document.getElementById(
+      "productCategory"
+    ).value.trim();
+
+  const description =
+    document.getElementById(
+      "productDescription"
+    ).value.trim();
+
+  const image_url =
+    document.getElementById(
+      "productImage"
+    ).value.trim();
+
+
+  if(!name){
+
+    showStatus(
+      "productStatus",
+      "⚠️ Product name is required.",
+      false
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    const data =
+      await apiRequest(
+        "/products",
+        {
+          method:"POST",
+
+          body:JSON.stringify({
+
+            name:name,
+
+            cat:cat,
+
+            description:description,
+
+            image_url:image_url
+
+          })
+        }
+      );
+
+
+    if(data.success){
+
+      document.getElementById(
+        "productName"
+      ).value = "";
+
+      document.getElementById(
+        "productCategory"
+      ).value = "";
+
+      document.getElementById(
+        "productDescription"
+      ).value = "";
+
+      document.getElementById(
+        "productImage"
+      ).value = "";
+
+
+      showStatus(
+        "productStatus",
+        "✓ Product saved successfully to D1.",
+        true
+      );
+
+
+      loadProducts();
+
+    }else{
+
+      throw new Error(
+        data.message ||
+        "Product save failed."
+      );
+
+    }
+
+
+  }catch(error){
+
+    showStatus(
+      "productStatus",
+      "❌ Product save failed: " +
+      error.message,
+      false
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   UPDATE PRODUCT
+========================================================= */
+
+async function updateProduct(id){
+
+  const card =
+    document.querySelector(
+      `[data-product-id="${id}"]`
+    );
+
+
+  if(!card){
+
+    return;
+
+  }
+
+
+  const name =
+    card.querySelector(
+      ".edit-product-name"
+    ).value.trim();
+
+
+  const cat =
+    card.querySelector(
+      ".edit-product-category"
+    ).value.trim();
+
+
+  const description =
+    card.querySelector(
+      ".edit-product-description"
+    ).value.trim();
+
+
+  const image_url =
+    card.querySelector(
+      ".edit-product-image"
+    ).value.trim();
+
+
+  try{
+
+    const data =
+      await apiRequest(
+        `/products?id=${encodeURIComponent(id)}`,
+        {
+          method:"PUT",
+
+          body:JSON.stringify({
+
+            name:name,
+
+            cat:cat,
+
+            description:description,
+
+            image_url:image_url
+
+          })
+        }
+      );
+
+
+    if(data.success){
+
+      alert(
+        "✓ Product updated successfully."
+      );
+
+      loadProducts();
+
+    }else{
+
+      throw new Error(
+        data.message ||
+        "Update failed."
+      );
+
+    }
+
+
+  }catch(error){
+
+    alert(
+      "❌ Update failed: " +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   DELETE PRODUCT
+========================================================= */
+
+async function deleteProduct(id){
+
+  if(
+    !confirm(
+      "Are you sure you want to delete this product?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  try{
+
+    const data =
+      await apiRequest(
+        `/products?id=${encodeURIComponent(id)}`,
+        {
+          method:"DELETE"
+        }
+      );
+
+
+    if(data.success){
+
+      alert(
+        "✓ Product deleted successfully."
+      );
+
+      loadProducts();
+
+    }else{
+
+      throw new Error(
+        data.message ||
+        "Delete failed."
+      );
+
+    }
+
+
+  }catch(error){
+
+    alert(
+      "❌ Delete failed: " +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   TEST API
+========================================================= */
+
+async function checkAPI(){
+
+  showStatus(
+    "apiStatus",
+    "Testing API...",
+    true
+  );
+
+
+  try{
+
+    const data =
+      await apiRequest("/test");
+
+
+    if(data.success){
+
+      showStatus(
+        "apiStatus",
+        "✓ API connected successfully. " +
+        "D1 database: " +
+        (data.database
+          ? "CONNECTED"
+          : "NOT CONNECTED"),
+        true
+      );
+
+    }else{
+
+      throw new Error(
+        data.message ||
+        "API test failed."
+      );
+
+    }
+
+
+  }catch(error){
+
+    showStatus(
+      "apiStatus",
+      "❌ API connection failed: " +
+      error.message,
+      false
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   HTML ESCAPE
+========================================================= */
+
+function escapeHtml(value){
+
+  return String(
+    value ?? ""
+  )
+
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+
+  .replace(
+    /</g,
+    "&lt;"
+  )
+
+  .replace(
+    />/g,
+    "&gt;"
+  )
+
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+/* =========================================================
+   ENTER KEY LOGIN
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(
+      event.key === "Enter" &&
+      document.getElementById(
+        "loginPage"
+      ).style.display !== "none"
+    ){
+
+      login();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   AUTO LOGIN SESSION
+========================================================= */
+
+window.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    if(
+      sessionStorage.getItem(
+        "saad_admin_logged_in"
+      ) === "true"
+    ){
+
+      showAdmin();
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+</html>
