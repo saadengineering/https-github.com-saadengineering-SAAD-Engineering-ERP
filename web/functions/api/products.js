@@ -1,6 +1,9 @@
 export async function onRequest(context) {
   const { request, env } = context;
 
+  // ---------------------------------------------------------
+  // D1 DATABASE CHECK
+  // ---------------------------------------------------------
   if (!env.DB) {
     return Response.json(
       {
@@ -12,12 +15,21 @@ export async function onRequest(context) {
   }
 
   try {
-    // GET — Read all products
+    // ========================================================
+    // GET — READ ALL PRODUCTS
+    // ========================================================
     if (request.method === "GET") {
       const result = await env.DB
-        .prepare(
-          `SELECT * FROM products ORDER BY id DESC`
-        )
+        .prepare(`
+          SELECT
+            id,
+            name,
+            cat,
+            description,
+            created_at
+          FROM saad_products
+          ORDER BY id DESC
+        `)
         .all();
 
       return Response.json({
@@ -26,25 +38,27 @@ export async function onRequest(context) {
       });
     }
 
-    // POST — Add a new product
+    // ========================================================
+    // POST — ADD NEW PRODUCT
+    // ========================================================
     if (request.method === "POST") {
       const data = await request.json();
 
-      const {
-        name = "",
-        part_no = "",
-        brand = "",
-        category = "",
-        unit = "",
-        purchase_price = 0,
-        selling_price = 0,
-        stock = 0,
-        min_stock = 0,
-        image = "",
-        description = ""
-      } = data;
+      // Support both "name" and "product_name"
+      const name = String(
+        data.name ?? data.product_name ?? ""
+      ).trim();
 
-      if (!name.trim()) {
+      // Support both "cat" and "category"
+      const category = String(
+        data.cat ?? data.category ?? ""
+      ).trim();
+
+      const description = String(
+        data.description ?? ""
+      ).trim();
+
+      if (!name) {
         return Response.json(
           {
             success: false,
@@ -55,35 +69,19 @@ export async function onRequest(context) {
       }
 
       const result = await env.DB
-        .prepare(
-          `INSERT INTO products
+        .prepare(`
+          INSERT INTO saad_products
           (
             name,
-            part_no,
-            brand,
-            category,
-            unit,
-            purchase_price,
-            selling_price,
-            stock,
-            min_stock,
-            image,
+            cat,
             description
           )
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
-        )
+          VALUES (?, ?, ?)
+        `)
         .bind(
-          name.trim(),
-          part_no.trim(),
-          brand.trim(),
-          category.trim(),
-          unit.trim(),
-          Number(purchase_price) || 0,
-          Number(selling_price) || 0,
-          Number(stock) || 0,
-          Number(min_stock) || 0,
-          image.trim(),
-          description.trim()
+          name,
+          category,
+          description
         )
         .run();
 
@@ -94,24 +92,25 @@ export async function onRequest(context) {
       });
     }
 
-    // PUT — Update an existing product
+    // ========================================================
+    // PUT — UPDATE PRODUCT
+    // ========================================================
     if (request.method === "PUT") {
       const data = await request.json();
 
-      const {
-        id,
-        name = "",
-        part_no = "",
-        brand = "",
-        category = "",
-        unit = "",
-        purchase_price = 0,
-        selling_price = 0,
-        stock = 0,
-        min_stock = 0,
-        image = "",
-        description = ""
-      } = data;
+      const id = Number(data.id);
+
+      const name = String(
+        data.name ?? data.product_name ?? ""
+      ).trim();
+
+      const category = String(
+        data.cat ?? data.category ?? ""
+      ).trim();
+
+      const description = String(
+        data.description ?? ""
+      ).trim();
 
       if (!id) {
         return Response.json(
@@ -123,49 +122,49 @@ export async function onRequest(context) {
         );
       }
 
-      await env.DB
-        .prepare(
-          `UPDATE products SET
+      if (!name) {
+        return Response.json(
+          {
+            success: false,
+            message: "Product name is required."
+          },
+          { status: 400 }
+        );
+      }
+
+      const result = await env.DB
+        .prepare(`
+          UPDATE saad_products
+          SET
             name = ?,
-            part_no = ?,
-            brand = ?,
-            category = ?,
-            unit = ?,
-            purchase_price = ?,
-            selling_price = ?,
-            stock = ?,
-            min_stock = ?,
-            image = ?,
+            cat = ?,
             description = ?
-          WHERE id = ?`
-        )
+          WHERE id = ?
+        `)
         .bind(
-          name.trim(),
-          part_no.trim(),
-          brand.trim(),
-          category.trim(),
-          unit.trim(),
-          Number(purchase_price) || 0,
-          Number(selling_price) || 0,
-          Number(stock) || 0,
-          Number(min_stock) || 0,
-          image.trim(),
-          description.trim(),
-          Number(id)
+          name,
+          category,
+          description,
+          id
         )
         .run();
 
       return Response.json({
         success: true,
-        message: "Product updated successfully."
+        message: "Product updated successfully.",
+        changes: result.meta?.changes || 0
       });
     }
 
-    // DELETE — Delete a product
+    // ========================================================
+    // DELETE — DELETE PRODUCT
+    // ========================================================
     if (request.method === "DELETE") {
       const data = await request.json();
 
-      if (!data.id) {
+      const id = Number(data.id);
+
+      if (!id) {
         return Response.json(
           {
             success: false,
@@ -175,19 +174,24 @@ export async function onRequest(context) {
         );
       }
 
-      await env.DB
-        .prepare(
-          `DELETE FROM products WHERE id = ?`
-        )
-        .bind(Number(data.id))
+      const result = await env.DB
+        .prepare(`
+          DELETE FROM saad_products
+          WHERE id = ?
+        `)
+        .bind(id)
         .run();
 
       return Response.json({
         success: true,
-        message: "Product deleted successfully."
+        message: "Product deleted successfully.",
+        changes: result.meta?.changes || 0
       });
     }
 
+    // ========================================================
+    // METHOD NOT ALLOWED
+    // ========================================================
     return Response.json(
       {
         success: false,
@@ -197,11 +201,13 @@ export async function onRequest(context) {
     );
 
   } catch (error) {
+    console.error("Products API Error:", error);
+
     return Response.json(
       {
         success: false,
         message: "API error.",
-        error: error.message
+        error: error?.message || String(error)
       },
       { status: 500 }
     );
