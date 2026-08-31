@@ -1,7 +1,9 @@
 export async function onRequest(context) {
   const { request, env } = context;
 
+  // =========================
   // Check D1 binding
+  // =========================
   if (!env.DB) {
     return Response.json(
       {
@@ -19,7 +21,13 @@ export async function onRequest(context) {
     if (request.method === "GET") {
       const result = await env.DB
         .prepare(`
-          SELECT *
+          SELECT
+            id,
+            name,
+            cat,
+            description,
+            image,
+            created_at
           FROM products
           ORDER BY id DESC
         `)
@@ -38,16 +46,9 @@ export async function onRequest(context) {
       const data = await request.json();
 
       const name = String(data.name || "").trim();
-      const part_no = String(data.part_no || "").trim();
-      const brand = String(data.brand || "").trim();
-      const category = String(data.category || "").trim();
-      const unit = String(data.unit || "").trim();
-      const purchase_price = Number(data.purchase_price) || 0;
-      const selling_price = Number(data.selling_price) || 0;
-      const stock = Number(data.stock) || 0;
-      const min_stock = Number(data.min_stock) || 0;
-      const image = String(data.image || "").trim();
+      const cat = String(data.cat || data.category || "").trim();
       const description = String(data.description || "").trim();
+      const image = String(data.image || "").trim();
 
       if (!name) {
         return Response.json(
@@ -64,31 +65,17 @@ export async function onRequest(context) {
           INSERT INTO products
           (
             name,
-            part_no,
-            brand,
-            category,
-            unit,
-            purchase_price,
-            selling_price,
-            stock,
-            min_stock,
-            image,
-            description
+            cat,
+            description,
+            image
           )
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          VALUES (?, ?, ?, ?)
         `)
         .bind(
           name,
-          part_no,
-          brand,
-          category,
-          unit,
-          purchase_price,
-          selling_price,
-          stock,
-          min_stock,
-          image,
-          description
+          cat,
+          description,
+          image
         )
         .run();
 
@@ -105,21 +92,12 @@ export async function onRequest(context) {
     if (request.method === "PUT") {
       const data = await request.json();
 
-      // IMPORTANT:
-      // Accept id from either "id" or "product_id"
       const id = Number(data.id || data.product_id || 0);
 
       const name = String(data.name || "").trim();
-      const part_no = String(data.part_no || "").trim();
-      const brand = String(data.brand || "").trim();
-      const category = String(data.category || "").trim();
-      const unit = String(data.unit || "").trim();
-      const purchase_price = Number(data.purchase_price) || 0;
-      const selling_price = Number(data.selling_price) || 0;
-      const stock = Number(data.stock) || 0;
-      const min_stock = Number(data.min_stock) || 0;
-      const image = String(data.image || "").trim();
+      const cat = String(data.cat || data.category || "").trim();
       const description = String(data.description || "").trim();
+      const image = String(data.image || "").trim();
 
       if (!id) {
         return Response.json(
@@ -146,30 +124,16 @@ export async function onRequest(context) {
           UPDATE products
           SET
             name = ?,
-            part_no = ?,
-            brand = ?,
-            category = ?,
-            unit = ?,
-            purchase_price = ?,
-            selling_price = ?,
-            stock = ?,
-            min_stock = ?,
-            image = ?,
-            description = ?
+            cat = ?,
+            description = ?,
+            image = ?
           WHERE id = ?
         `)
         .bind(
           name,
-          part_no,
-          brand,
-          category,
-          unit,
-          purchase_price,
-          selling_price,
-          stock,
-          min_stock,
-          image,
+          cat,
           description,
+          image,
           id
         )
         .run();
