@@ -1144,12 +1144,23 @@ th{
   </div>
 
 </section>
+/* =========================================================
+   PRODUCT MASTER
+========================================================= */
 
+function openProductModal(){
 
-<!-- =========================================================
-     PRODUCT MASTER
-========================================================= -->
+  document.getElementById("productCode").value =
+    "PRD-" +
+    String(products.length + 1).padStart(5,"0");
 
+  document
+    .getElementById("productModal")
+    .classList.add("show");
+
+}
+
+async function saveProduct(){
 <section id="page-products" class="page">
 
   <div class="page-header">
