@@ -2741,85 +2741,46 @@ function getNextNumber(prefix,count){
 /* =========================================================
    PRODUCT MASTER
 ========================================================= */
-
-function openProductModal(){
-
-  document.getElementById(
-    "productCode"
-  ).value =
-    "PRD-" +
-    String(products.length + 1)
-      .padStart(5,"0");
-
-  document.getElementById(
-    "productModal"
-  ).classList.add("show");
-
-}
-
-
-function saveProduct(){
+async function saveProduct(){
 
   const product = {
 
-    id:Date.now(),
-
     code:
-      document.getElementById(
-        "productCode"
-      ).value,
+      document.getElementById("productCode").value,
 
     part:
-      document.getElementById(
-        "productPart"
-      ).value.trim(),
+      document.getElementById("productPart").value.trim(),
 
     name:
-      document.getElementById(
-        "productName"
-      ).value.trim(),
+      document.getElementById("productName").value.trim(),
 
     brand:
-      document.getElementById(
-        "productBrand"
-      ).value.trim(),
+      document.getElementById("productBrand").value.trim(),
 
     category:
-      document.getElementById(
-        "productCategory"
-      ).value,
+      document.getElementById("productCategory").value,
 
     unit:
-      document.getElementById(
-        "productUnit"
-      ).value,
+      document.getElementById("productUnit").value,
 
     purchase:
       Number(
-        document.getElementById(
-          "productPurchase"
-        ).value
+        document.getElementById("productPurchase").value
       ),
 
     sale:
       Number(
-        document.getElementById(
-          "productSale"
-        ).value
+        document.getElementById("productSale").value
       ),
 
     stock:
       Number(
-        document.getElementById(
-          "productStock"
-        ).value
+        document.getElementById("productStock").value
       ),
 
     minimum:
       Number(
-        document.getElementById(
-          "productMinimum"
-        ).value
+        document.getElementById("productMinimum").value
       )
 
   };
@@ -2834,19 +2795,89 @@ function saveProduct(){
   }
 
 
-  products.push(product);
+  try{
 
-  saveData();
+    const response =
+      await fetch("/api/products", {
 
-  closeModal("productModal");
+        method:"POST",
 
-  renderProducts();
+        headers:{
+          "Content-Type":"application/json"
+        },
 
-  updateDashboard();
+        body:JSON.stringify({
 
-  showToast(
-    "Product saved successfully."
-  );
+          product_code: product.code,
+
+          item_no: product.part,
+
+          name: product.name,
+
+          product_name: product.name,
+
+          brand: product.brand,
+
+          category: product.category,
+
+          unit: product.unit,
+
+          unit_price: product.purchase,
+
+          price: product.sale,
+
+          stock: product.stock,
+
+          stock_qty: product.stock,
+
+          min_stock: product.minimum
+
+        })
+
+      });
+
+
+    const data =
+      await response.json();
+
+
+    if(
+      !response.ok ||
+      !data.success
+    ){
+
+      throw new Error(
+        data.message ||
+        "Failed to save product to D1."
+      );
+
+    }
+
+
+    showToast(
+      "Product saved to D1 successfully."
+    );
+
+
+    closeModal("productModal");
+
+
+    await loadProductsFromAPI();
+
+
+  }catch(error){
+
+    console.error(
+      "Product Save API Error:",
+      error
+    );
+
+    alert(
+      "Product could not be saved to D1.\n\n" +
+      error.message
+    );
+
+  }
 
 }
 
