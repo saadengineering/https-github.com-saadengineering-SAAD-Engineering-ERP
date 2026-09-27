@@ -2309,13 +2309,110 @@ th{
 
 
 <script>
-
 /* =========================================================
    DATA
 ========================================================= */
 
 let products =
   JSON.parse(localStorage.getItem("saad_products")) || [];
+
+async function loadProductsFromAPI(){
+
+  try{
+
+    const response =
+      await fetch("/api/products", {
+        method:"GET",
+        cache:"no-store"
+      });
+
+    const data =
+      await response.json();
+
+    if(
+      !response.ok ||
+      !data.success ||
+      !Array.isArray(data.products)
+    ){
+
+      throw new Error(
+        data.message ||
+        "Failed to load products."
+      );
+
+    }
+
+    products =
+      data.products.map(p => ({
+
+        id: Number(p.id),
+
+        code:
+          p.product_code || "",
+
+        part:
+          p.item_no || p.model || "",
+
+        name:
+          p.name ||
+          p.product_name ||
+          "",
+
+        brand:
+          p.brand || "",
+
+        category:
+          p.category || "",
+
+        unit:
+          p.unit || "PCS",
+
+        purchase:
+          Number(
+            p.unit_price ??
+            p.price ??
+            0
+          ),
+
+        sale:
+          Number(
+            p.price ??
+            p.unit_price ??
+            0
+          ),
+
+        stock:
+          Number(
+            p.stock ??
+            p.stock_qty ??
+            0
+          ),
+
+        minimum:
+          Number(
+            p.min_stock ?? 0
+          )
+
+      }));
+
+    renderProducts();
+    updateDashboard();
+    renderPOSProducts();
+
+  }catch(error){
+
+    console.error(
+      "Product API Error:",
+      error
+    );
+
+    showToast(
+      "Unable to load products from D1."
+    );
+
+  }
+
+}
 
 let customers =
   JSON.parse(localStorage.getItem("saad_customers")) || [];
@@ -2330,6 +2427,7 @@ let purchases =
   JSON.parse(localStorage.getItem("saad_purchases")) || [];
 
 let cart = [];
+
 
 
 /* =========================================================
@@ -2575,8 +2673,9 @@ function toggleSidebar(){
 /* =========================================================
    INITIALIZE
 ========================================================= */
+async function initializeERP(){
 
-function initializeERP(){
+  await loadProductsFromAPI();
 
   updateDashboard();
 
@@ -2593,7 +2692,6 @@ function initializeERP(){
   initializeDocuments();
 
 }
-
 
 function initializeDocuments(){
 
