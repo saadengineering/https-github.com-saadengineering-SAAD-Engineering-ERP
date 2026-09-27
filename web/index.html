@@ -1201,6 +1201,55 @@ async function saveProduct(){
         <thead>
 
           <tr>
+           d="productsTable"></tbody>
+
+      </table>
+ <th>Code</th>
+            
+
+</section>
+      <!-- =========================================================
+     PRODUCT MASTER
+========================================================= -->
+
+<section id="page-products" class="page">
+
+  <div class="page-header">
+
+    <div>
+      <h2>Product Master</h2>
+      <p>Manage spare parts and products.</p>
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-primary"
+      onclick="openProductModal()"
+    >
+      + Add Product
+    </button>
+
+  </div>
+
+  <div class="card">
+
+    <div class="form-group">
+
+      <input
+        type="text"
+        id="productSearch"
+        placeholder="Search Product / Part Number / Brand..."
+        oninput="renderProducts()"
+      >
+
+    </div>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+          <tr>
             <th>Code</th>
             <th>Part No.</th>
             <th>Product Name</th>
@@ -1213,7 +1262,6 @@ async function saveProduct(){
             <th>Status</th>
             <th>Action</th>
           </tr>
-
         </thead>
 
         <tbody id="productsTable"></tbody>
