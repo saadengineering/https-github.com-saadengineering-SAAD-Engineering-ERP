@@ -2800,7 +2800,33 @@ function getNextNumber(prefix,count){
 /* =========================================================
    PRODUCT MASTER
 ========================================================= */
-async function saveProduct(){
+
+
+/* =========================
+   OPEN PRODUCT MODAL
+========================= */
+
+function openProductModal() {
+
+  const productCode =
+    "PRD-" +
+    String(products.length + 1).padStart(5, "0");
+
+  document.getElementById("productCode").value =
+    productCode;
+
+  document
+    .getElementById("productModal")
+    .classList.add("show");
+
+}
+
+
+/* =========================
+   SAVE PRODUCT TO D1
+========================= */
+
+async function saveProduct() {
 
   const product = {
 
@@ -2823,29 +2849,23 @@ async function saveProduct(){
       document.getElementById("productUnit").value,
 
     purchase:
-      Number(
-        document.getElementById("productPurchase").value
-      ),
+      Number(document.getElementById("productPurchase").value),
 
     sale:
-      Number(
-        document.getElementById("productSale").value
-      ),
+      Number(document.getElementById("productSale").value),
 
     stock:
-      Number(
-        document.getElementById("productStock").value
-      ),
+      Number(document.getElementById("productStock").value),
 
     minimum:
-      Number(
-        document.getElementById("productMinimum").value
-      )
+      Number(document.getElementById("productMinimum").value)
 
   };
 
 
-  if(!product.name){
+  // Validate Product Name
+
+  if (!product.name) {
 
     alert("Product Name is required.");
 
@@ -2854,82 +2874,73 @@ async function saveProduct(){
   }
 
 
-  try{
+  // Save Product to API
 
-    const response =
-      await fetch("/api/products", {
+  try {
 
-        method:"POST",
+    const response = await fetch("/api/products", {
 
-        headers:{
-          "Content-Type":"application/json"
-        },
+      method: "POST",
 
-        body:JSON.stringify({
+      headers: {
+        "Content-Type": "application/json"
+      },
 
-          product_code: product.code,
+      body: JSON.stringify({
 
-          item_no: product.part,
+        product_code: product.code,
 
-          name: product.name,
+        item_no: product.part,
 
-          product_name: product.name,
+        name: product.name,
 
-          brand: product.brand,
+        product_name: product.name,
 
-          category: product.category,
+        brand: product.brand,
 
-          unit: product.unit,
+        category: product.category,
 
-          unit_price: product.purchase,
+        unit: product.unit,
 
-          price: product.sale,
+        unit_price: product.purchase,
 
-          stock: product.stock,
+        price: product.sale,
 
-          stock_qty: product.stock,
+        stock: product.stock,
 
-          min_stock: product.minimum
+        stock_qty: product.stock,
 
-        })
+        min_stock: product.minimum
 
-      });
+      })
 
-
-    const data =
-      await response.json();
+    });
 
 
-    if(
-      !response.ok ||
-      !data.success
-    ){
+    const data = await response.json();
+
+
+    if (!response.ok || !data.success) {
 
       throw new Error(
-        data.message ||
-        "Failed to save product to D1."
+        data.message || "Failed to save product to D1."
       );
 
     }
 
 
-    showToast(
-      "Product saved to D1 successfully."
-    );
+    // Success
 
+    showToast("Product saved to D1 successfully.");
 
     closeModal("productModal");
-
 
     await loadProductsFromAPI();
 
 
-  }catch(error){
+  } catch (error) {
 
-    console.error(
-      "Product Save API Error:",
-      error
-    );
+    console.error("Product Save API Error:", error);
 
     alert(
       "Product could not be saved to D1.\n\n" +
@@ -2941,21 +2952,21 @@ async function saveProduct(){
 }
 
 
-function renderProducts(){
+/* =========================
+   RENDER PRODUCT TABLE
+========================= */
+
+function renderProducts() {
 
   const tbody =
-    document.getElementById(
-      "productsTable"
-    );
+    document.getElementById("productsTable");
 
-  if(!tbody) return;
+  if (!tbody) return;
 
 
   const search =
     (
-      document.getElementById(
-        "productSearch"
-      )?.value || ""
+      document.getElementById("productSearch")?.value || ""
     ).toLowerCase();
 
 
@@ -2963,49 +2974,54 @@ function renderProducts(){
 
 
   products
-    .filter(p =>
-      !search ||
-      p.name.toLowerCase().includes(search) ||
-      p.part.toLowerCase().includes(search) ||
-      p.brand.toLowerCase().includes(search)
-    )
+    .filter(p => {
+
+      const name = (p.name || "").toLowerCase();
+      const part = (p.part || "").toLowerCase();
+      const brand = (p.brand || "").toLowerCase();
+
+      return (
+        !search ||
+        name.includes(search) ||
+        part.includes(search) ||
+        brand.includes(search)
+      );
+
+    })
     .forEach(p => {
 
       const low =
-        Number(p.stock) <=
-        Number(p.minimum);
+        Number(p.stock) <= Number(p.minimum);
 
 
-      const tr =
-        document.createElement("tr");
+      const tr = document.createElement("tr");
+
 
       tr.innerHTML = `
 
-        <td>${p.code}</td>
+        <td>${p.code || "-"}</td>
 
         <td>${p.part || "-"}</td>
 
-        <td><strong>${p.name}</strong></td>
+        <td><strong>${p.name || "-"}</strong></td>
 
         <td>${p.brand || "-"}</td>
 
-        <td>${p.category}</td>
+        <td>${p.category || "-"}</td>
 
-        <td>${p.unit}</td>
+        <td>${p.unit || "-"}</td>
 
-        <td>${money(p.purchase)}</td>
+        <td>${money(p.purchase || 0)}</td>
 
-        <td>${money(p.sale)}</td>
+        <td>${money(p.sale || 0)}</td>
 
-        <td>${p.stock}</td>
+        <td>${p.stock ?? 0}</td>
 
         <td>
           ${
             low
-            ?
-            '<span class="badge badge-danger">LOW STOCK</span>'
-            :
-            '<span class="badge badge-success">OK</span>'
+              ? '<span class="badge badge-danger">LOW STOCK</span>'
+              : '<span class="badge badge-success">OK</span>'
           }
         </td>
 
@@ -3023,6 +3039,7 @@ function renderProducts(){
 
       `;
 
+
       tbody.appendChild(tr);
 
     });
@@ -3030,18 +3047,20 @@ function renderProducts(){
 }
 
 
-function deleteProduct(id){
+/* =========================
+   DELETE PRODUCT
+========================= */
 
-  if(
-    !confirm(
-      "Delete this product?"
-    )
-  ) return;
+function deleteProduct(id) {
+
+  if (!confirm("Delete this product?")) {
+    return;
+  }
+
 
   products =
-    products.filter(
-      p => p.id !== id
-    );
+    products.filter(p => p.id !== id);
+
 
   saveData();
 
@@ -3050,7 +3069,6 @@ function deleteProduct(id){
   updateDashboard();
 
 }
-
 
 /* =========================================================
    CUSTOMER MASTER
